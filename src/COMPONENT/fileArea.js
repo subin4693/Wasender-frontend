@@ -43,6 +43,9 @@ import BulkContactPage from "./bulkContactPage";
 import AddDevicesPage from "./addDevicePage";
 import ManageDevicesPage from "./manageDevicesPage";
 import { DashBoardPage } from "./dashboardPage";
+import {AdminDashboard} from "./adminDashboard";
+import AdminContactsPage from "./adminContacts";
+import AdminAddDevices from "./addDevicePage";
 import ReplyPage from "./replyPage";
 import CreateReplyPage from "./createReplyPage";
 
@@ -290,6 +293,9 @@ export default function FileArea() {
         <Typography paragraph>
           <Routes>
             <Route path="/dashboard" element={<DashBoardPage />} />
+            <Route path="/admindashboard" element={<AdminDashboard />} />
+            <Route path="/admincontacts" element={<AdminContactsPage />} />
+            <Route path="/adminadddevices" element={<AdminAddDevices />} />
             <Route path="/devices" element={<DevicesPage />} />
             <Route path="/managedevices" element={<ManageDevicesPage />} />
             <Route path="/adddevice" element={<AddDevicesPage />} />
