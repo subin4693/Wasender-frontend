@@ -18,6 +18,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import GraphicEqIcon from "@mui/icons-material/GraphicEq";
 import SendIcon from "@mui/icons-material/Send";
+import BrowseGalleryIcon from '@mui/icons-material/BrowseGallery';
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
@@ -48,6 +49,7 @@ import AdminContactsPage from "./adminContacts";
 import AdminAddDevices from "./addDevicePage";
 import ReplyPage from "./replyPage";
 import CreateReplyPage from "./createReplyPage";
+import Schedulers from "./Scheduler";
 
 export default function FileArea() {
   const drawerWidth = 250;
@@ -85,7 +87,7 @@ export default function FileArea() {
       <Toolbar />
       <Divider />
       <List>
-        {["DashBoard", "Devices", "Contacts", "Send", "AutoReply", "Logs"].map(
+        {["DashBoard", "Devices", "Contacts", "Send", "AutoReply", "Schedulers", "Logs"].map(
           (text, index) => (
             <ListItem
               key={text}
@@ -101,6 +103,8 @@ export default function FileArea() {
                   navigate("./send");
                 } else if (text === "AutoReply") {
                   navigate("./reply");
+                }else if (text === "Schedulers") {
+                  navigate("./schedulers");
                 } else if (text === "Logs") {
                   navigate("./log");
                 }
@@ -120,6 +124,7 @@ export default function FileArea() {
                   )}
                   {text === "Contacts" ? <PeopleAltIcon id="peopleIcon" /> : ""}
                   {text === "Send" ? <SendIcon id="sendIcon" /> : ""}
+                  {text === "Schedulers" ? <BrowseGalleryIcon id="sendIcon" /> : ""}
                   {text === "AutoReply" ? <ReplyIcon id="sendIcon" /> : ""}
                   {text === "Logs" ? <ChangeCircleIcon id="sendIcon" /> : ""}
                 </ListItemIcon>
@@ -303,6 +308,7 @@ export default function FileArea() {
             <Route path="/createcontact" element={<CreateContactPage />} />
             <Route path="/bulkcreatecontact" element={<BulkContactPage />} />
             <Route path="/send" element={<SendPage />} />
+            <Route path="/schedulers" element={<Schedulers />} />
             <Route path="/log" element={<LogPage />} />
             <Route path="/reply" element={<ReplyPage />} />
             <Route path="/createreply" element={<CreateReplyPage />} />
