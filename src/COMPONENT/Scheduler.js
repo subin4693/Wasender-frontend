@@ -57,6 +57,14 @@ export default function Schedulers() {
   const [siteID, setSiteID] = useState(false);
   const [value, setValue] = useState(null);
 
+//   function alert() {
+//     alert("It's 3PM!");
+//   }
+//   var timeAt3pm = new Date("3/21/2024 03:50:00 PM").getTime()
+//     , timeNow = new Date().getTime()
+//     , offsetMillis = timeAt3pm - timeNow;
+//   setTimeout(alert, offsetMillis);
+
   useEffect(() => {
     try {
       console.log(params);
@@ -274,13 +282,12 @@ export default function Schedulers() {
                   <div className="p-5">
                   <div className="spanA">Schedule Your <br/> Message :</div>
                     <div className="spanC">
+                    {/* <input type="datetime-local" label="Schedule Your Message" placeholder="Write your message" className="fileInput" /> */}
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <DemoContainer components={['DateTimePicker']}>
                                 <DateTimePicker label="Schedule Your Message" value={value} onChange={
-                                    (e)=>{setValue(e);
-                                        
-                                        const newDate = new Date(e);
-                                        console.log(`The Time From datePicker: ${newDate.toLocaleDateString()}}`);
+                                    (e)=>{
+                                        console.log(`${(e)}`);
                                 }}/>
                             </DemoContainer>
                         </LocalizationProvider>
@@ -323,7 +330,7 @@ export default function Schedulers() {
                               setBase(e.base64);
                             }}
                           />
-                          {/* <input type="file" className="fileInput" /> */}
+                          {/* <input type="file" className="fileInp ut" /> */}
                         </div>
                       </div>
 
