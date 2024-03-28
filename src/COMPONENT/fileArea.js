@@ -46,7 +46,6 @@ import ManageDevicesPage from "./manageDevicesPage";
 import { DashBoardPage } from "./dashboardPage";
 import {AdminDashboard} from "./adminDashboard";
 import AdminContactsPage from "./adminContacts";
-import AdminAddDevices from "./addDevicePage";
 import ReplyPage from "./replyPage";
 import CreateReplyPage from "./createReplyPage";
 import Schedulers from "./Scheduler";
@@ -300,7 +299,6 @@ export default function FileArea() {
             <Route path="/dashboard" element={<DashBoardPage />} />
             <Route path="/admindashboard" element={<AdminDashboard />} />
             <Route path="/admincontacts" element={<AdminContactsPage />} />
-            <Route path="/adminadddevices" element={<AdminAddDevices />} />
             <Route path="/devices" element={<DevicesPage />} />
             <Route path="/managedevices" element={<ManageDevicesPage />} />
             <Route path="/adddevice" element={<AddDevicesPage />} />

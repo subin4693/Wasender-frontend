@@ -279,20 +279,21 @@ export default function Schedulers() {
                     </div>
                   </div>
                   <div className="toDiv">
-                  <div className="p-5">
                   <div className="spanA">Schedule Your <br/> Message :</div>
-                    <div className="spanC">
+                    
+                      <div className="spanB">
                     {/* <input type="datetime-local" label="Schedule Your Message" placeholder="Write your message" className="fileInput" /> */}
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <DemoContainer components={['DateTimePicker']}>
-                                <DateTimePicker label="Schedule Your Message" value={value} onChange={
+                                <DateTimePicker label="Schedule Your Message" className="timepicker" value={value} onChange={
                                     (e)=>{
                                         console.log(`${(e)}`);
                                 }}/>
                             </DemoContainer>
                         </LocalizationProvider>
-                    </div>
-                  </div>
+                        </div>
+                    
+                  
                   </div>
                   {show === "chat" ? (
                     <>

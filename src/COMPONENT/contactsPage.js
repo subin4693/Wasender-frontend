@@ -38,7 +38,7 @@ export default function ContactsPage() {
 
   const handleGetContacts = async () => {
     try {
-      await axios.post(`${linkNode}/getcontacts`).then((res) => {
+      await axios.get(`${linkNode}/getcontacts`).then((res) => {
         console.log(res.data.msgArr);
         setDevices(res.data?.msgArr?.reverse());
       });
@@ -49,9 +49,10 @@ export default function ContactsPage() {
 
   const handleDeleteContacts = async (data) => {
     try {
-      console.log(data);
-      await axios.post(`${linkNode}/delcontacts`, data).then((res) => {
+      
+      await axios.post(`${linkNode}/delcontacts`, {data} ).then((res) => {
         setStatus(true);
+        console.log(data.contactID);
       });
     } catch (err) {
       console.log(err);

@@ -26,7 +26,7 @@ export default function DevicesPage() {
 
   const handleGetDevicesApi = async () => {
     try {
-      await axios.post(`${linkNode}/getdevice`).then((res) => {
+      await axios.get(`${linkNode}/getdevice`).then((res) => {
         setDevices(res.data.arrData);
       });
     } catch (err) {
