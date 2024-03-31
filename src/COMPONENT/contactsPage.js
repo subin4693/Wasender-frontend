@@ -154,7 +154,7 @@ export default function ContactsPage() {
                           handleEditContact(data);
                         }}
                         className="rocketBtn"
-                        style={{ backgroundColor: "yellow" }}
+                        style={{ backgroundColor: "black" }}
                       >
                         <span className="rocketIcon">
                           <ModeEditIcon id="rocketIcon" />

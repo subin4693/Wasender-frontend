@@ -38,8 +38,9 @@ export default function LogPage() {
 
   const handleGetDevicesApi = async () => {
     try {
-      await axios.post(`${linkNode}/getdevice`).then((res) => {
+      await axios.get(`${linkNode}/getdevice`).then((res) => {
         //fromOptions
+        //console.log(res.data.arrData);
         let fromData = res.data.arrData;
         let finalFrom = [];
 
@@ -57,7 +58,7 @@ export default function LogPage() {
         setFromOptions(finalFrom);
       });
 
-      await axios.post(`${linkNode}/getcontacts`).then((res) => {
+      await axios.get(`${linkNode}/getcontacts`).then((res) => {
         //ToOptions
         let toData = res.data?.msgArr?.reverse();
         let toFrom = [];
@@ -80,7 +81,8 @@ export default function LogPage() {
 
   const handleLogMessages = async (obj) => {
     try {
-      await axios.post(`${linkNode}/logmsg`, obj).then((res) => {
+      console.log(obj);
+      await axios.post(`${linkNode}/logmsg`, {obj}).then((res) => {
         let msgArr = res?.data?.message?.messages;
         setMessages(msgArr);
       });
@@ -91,7 +93,7 @@ export default function LogPage() {
 
   const handleLogChats = async () => {
     try {
-      console.log(fromSelect, toSelect);
+      //console.log(fromSelect, toSelect);
       await axios
         .post(`${linkNode}/logchat`, { fromSelect, toSelect })
         .then((res) => {

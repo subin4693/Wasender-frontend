@@ -11,9 +11,6 @@
   .bodyA {
     margin-top: 5%;
   }
-  .timepicker {
-    display: flex;
-  }
   .buttonsDiv {
   }
   .contentDiv {
@@ -80,14 +77,6 @@
     width: 100%;
     flex: 0.85;
     display: flex;
-    align-items: center;
-  }
-  .spanC {
-    position:relative; 
-    left: 150px; 
-    bottom:50px;
-    flex: 0.85;
-    display: flex; 
     align-items: center;
   }
   .textArea {
@@ -176,8 +165,5 @@
       outline: none !important;
       box-shadow: none !important;
     }
-  }
-  .calendar {
-    size: 100px;
   }
 }
