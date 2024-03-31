@@ -47,7 +47,7 @@ export default function CreateReplyPage() {
 
   const handleGetDevicesApi = async () => {
     try {
-      await axios.post(`${linkNode}/getdevice`).then((res) => {
+      await axios.get(`${linkNode}/getdevice`).then((res) => {
         //fromOptions
         let fromData = res.data.arrData;
         let finalFrom = [];
@@ -65,7 +65,7 @@ export default function CreateReplyPage() {
         //
         setFromOptions(finalFrom);
       });
-      await axios.post(`${linkNode}/getcontacts`).then((res) => {
+      await axios.get(`${linkNode}/getcontacts`).then((res) => {
         //ToOptions
         let toData = res.data?.msgArr?.reverse();
         let toFrom = [];
@@ -306,7 +306,7 @@ export default function CreateReplyPage() {
                     <div className="spanB">
                       <MultiSelect
                         id="multiSelect"
-                        options={toOptions}
+                        options={fromOptions}
                         value={selected}
                         onChange={setSelected}
                         labelledBy="Select"
@@ -323,7 +323,7 @@ export default function CreateReplyPage() {
                         value={selectedOption}
                         // defaultValue={selectedOption}
                         onChange={setSelectedOption}
-                        options={fromOptions}
+                        options={toOptions}
                       />
                     </div>
                   </div>

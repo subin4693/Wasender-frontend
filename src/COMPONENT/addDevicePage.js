@@ -23,10 +23,10 @@ export default function AddDevicesPage() {
   const handleSubmit = async () => {
     try {
       await axios
-        .post(`${linkNode}/setdevice`, { name: name, number: number })
+        .post(`${linkNode}/setdevice`, {name, number })
         .then((res) => {
           console.log(res.data.message);
-          //navigate("../devices");
+          navigate("../devices");
         });
     } catch (err) {
       console.log(err);

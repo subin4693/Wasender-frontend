@@ -70,7 +70,7 @@ export default function SendPage() {
 
   const handleGetDevicesApi = async () => {
     try {
-      await axios.post(`${linkNode}/getdevice`).then((res) => {
+      await axios.get(`${linkNode}/getdevice`).then((res) => {
         setDevices(res.data.arrData);
         //fromOptions
         let fromData = res.data.arrData;
@@ -89,7 +89,7 @@ export default function SendPage() {
         //
         setFromOptions(finalFrom);
       });
-      await axios.post(`${linkNode}/getcontacts`).then((res) => {
+      await axios.get(`${linkNode}/getcontacts`).then((res) => {
         setContacts(res.data?.msgArr?.reverse());
         //ToOptions
         let toData = res.data?.msgArr?.reverse();

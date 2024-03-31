@@ -25,8 +25,8 @@ export default function ManageDevicesPage() {
   const [chance, setChance] = useState(false);
   const [showQr, setShowQr] = useState(true);
   const [qqq, setq] = useState("");
-  const insID = "instance77445";
-  const insTok = "gwab0rhjqpa8d539";
+  const insID = "instance77326";
+  const insTok = "tz4c7nm9r4luh6i4";
   const dispatch = useDispatch();
   const [status, setStatus] = useState(false);
 
@@ -99,7 +99,7 @@ export default function ManageDevicesPage() {
           "Content-Type": "application/x-www-form-urlencoded",
         },
         params: {
-          token: "gwab0rhjqpa8d539",
+          token: "tz4c7nm9r4luh6i4",
         },
       };
 
