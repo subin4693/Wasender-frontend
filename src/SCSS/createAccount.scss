@@ -1,46 +1,76 @@
 .create-account-container {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #09b59c;
+    font-family: "Ubuntu", sans-serif;
   
-  h2 {
-    text-align: center;
-  }
+    .regisPage {
+      border-radius: 10px;
+      background-color: white;
+      padding: 20px;
+      width: 300px;
   
-  .form-group {
-    margin-bottom: 15px;
-  }
+      .title {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-top: 30px;
+        padding-bottom: 30px;
+        font-size: 40px;
+        font-weight: bolder;
   
-  label {
-    display: block;
-    font-weight: bold;
-  }
+        #spaIcon {
+          font-size: 40px;
+          color: #09b59c;
+        }
   
-  input[type="text"],
-  input[type="email"],
-  input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-  }
+        .senderSpan {
+          color: #09b59c;
+        }
+      }
   
-  button {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
+      h2 {
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 20px;
+      }
   
-  button:hover {
-    background-color: #0056b3;
+      .form-group {
+        margin-bottom: 20px;
+  
+        label {
+          display: block;
+          font-weight: bold;
+          margin-bottom: 5px;
+        }
+  
+        input[type="email"],
+        input[type="password"] {
+          width: calc(100% - 22px);
+          padding: 10px;
+          font-size: 16px;
+          border-radius: 5px;
+          border: solid 1px gray;
+        }
+      }
+  
+      button {
+        width: 100%;
+        padding: 11px 14px;
+        font-size: 16px;
+        background-color: #1f8be1;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+  
+        &:hover {
+          background-color: #0d6cb1;
+        }
+      }
+    }
   }
   

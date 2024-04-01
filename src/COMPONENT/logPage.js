@@ -38,7 +38,7 @@ export default function LogPage() {
 
   const handleGetDevicesApi = async () => {
     try {
-      await axios.get(`${linkNode}/getdevice`).then((res) => {
+      await axios.post(`${linkNode}/getdevice`).then((res) => {
         //fromOptions
         //console.log(res.data.arrData);
         let fromData = res.data.arrData;
@@ -58,7 +58,7 @@ export default function LogPage() {
         setFromOptions(finalFrom);
       });
 
-      await axios.get(`${linkNode}/getcontacts`).then((res) => {
+      await axios.post(`${linkNode}/getcontacts`).then((res) => {
         //ToOptions
         let toData = res.data?.msgArr?.reverse();
         let toFrom = [];

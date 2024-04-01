@@ -38,7 +38,7 @@ export default function ContactsPage() {
 
   const handleGetContacts = async () => {
     try {
-      await axios.get(`${linkNode}/getcontacts`).then((res) => {
+      await axios.post(`${linkNode}/getcontacts`).then((res) => {
         console.log(res.data.msgArr);
         setDevices(res.data?.msgArr?.reverse());
       });

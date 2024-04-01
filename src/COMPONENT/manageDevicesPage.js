@@ -94,7 +94,7 @@ export default function ManageDevicesPage() {
     try {
       let config = {
         method: "get",
-        url: "https://api.ultramsg.com/instance77445/instance/qr",
+        url: "https://api.ultramsg.com/instance77326/instance/qr",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
         },

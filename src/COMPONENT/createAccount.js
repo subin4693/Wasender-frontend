@@ -1,52 +1,66 @@
 import React, { useState } from 'react';
-import '../SCSS/createAccount.scss'; // Import CSS file for styling
+import { useNavigate } from "react-router-dom";
+import '../SCSS/createAccount.scss';
+import SpaIcon from "@mui/icons-material/Spa";
 
-export default function CreateAccount  ()  {
-  // State variables to manage form inputs
-  const [username, setUsername] = useState('');
+const CreateAccount = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const navigate = useNavigate();
 
-  // Function to handle form submission
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Perform form submission logic here
-    console.log('Form submitted:', username, email, password);
+    console.log('Form submitted:', email, password);
+    // Navigate to dashboard after form submission
+    navigate("/filearea/dashboard");
   };
 
-  return (
-    <div className="create-account-container">
-      <h2>Create Account</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label>Username:</label>
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
+return (
+    <div className="create-account-container" style={{ backgroundColor: '#09b59c' }}>
+        <div className="regisPage">
+            <div className="title">
+                <span className="titleSpanA">
+                    <SpaIcon id="spaIcon" />
+                </span>
+                <span className="titleSpanA">
+                    WA<span className="senderSpan">sender</span>
+                </span>
+            </div>
+            <h2>Create Account</h2>
+            <form className="create-account-form" onSubmit={handleSubmit}>
+                <div className="form-group">
+                    <label>Email:</label>
+                    <input
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <label>Password:</label>
+                    <input
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <label>Confirm Password:</label>
+                    <input
+                        type="password"
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        required
+                    />
+                </div>
+                <button type="submit">Create Account</button>
+            </form>
         </div>
-        <div className="form-group">
-          <label>Email:</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label>Password:</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit">Create Account</button>
-      </form>
     </div>
-  );
+);
 };
+
+export default CreateAccount;

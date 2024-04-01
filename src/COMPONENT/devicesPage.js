@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { linkNode } from "../nodelink";
 import axios from "axios";
-import "../SCSS/devicesPage.scss";
+import "../SCSS/devicesPage.scss"
 import { useDispatch } from "react-redux";
 import { funSetDevice } from "../reactRedux/action";
 
@@ -26,7 +26,7 @@ export default function DevicesPage() {
 
   const handleGetDevicesApi = async () => {
     try {
-      await axios.get(`${linkNode}/getdevice`).then((res) => {
+      await axios.post(`${linkNode}/getdevice`).then((res) => {
         setDevices(res.data.arrData);
       });
     } catch (err) {

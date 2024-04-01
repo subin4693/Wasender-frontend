@@ -56,6 +56,7 @@ export default function Schedulers() {
   const params = useParams();
   const [siteID, setSiteID] = useState(false);
   const [value, setValue] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(null);
 
 //   function alert() {
 //     alert("It's 3PM!");
@@ -126,16 +127,6 @@ export default function Schedulers() {
 
   const handleSend = async () => {
     try {
-      console.log(
-        // selected,
-        // selectedOption,
-        // show,
-        // bodyText,
-        // latText,
-        // lgnText,
-        // base,
-        docTitle
-      );
       let dataObj = {
         from: selectedOption,
         to: selected,
@@ -145,9 +136,10 @@ export default function Schedulers() {
         lat: latText,
         lng: lgnText,
         type: show,
+        schdate: selectedDate,
       };
-      await axios.post(`${linkNode}/sendmsg`, dataObj).then((res) => {
-        console.log(res.data);
+      await axios.post(`${linkNode}/schsendmsg`, dataObj).then((res) => {
+        alert(res.data.msgArr);
       });
     } catch (err) {
       console.log(err);
@@ -285,10 +277,7 @@ export default function Schedulers() {
                     {/* <input type="datetime-local" label="Schedule Your Message" placeholder="Write your message" className="fileInput" /> */}
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <DemoContainer components={['DateTimePicker']}>
-                                <DateTimePicker label="Schedule Your Message" className="timepicker" value={value} onChange={
-                                    (e)=>{
-                                        console.log(`${(e)}`);
-                                }}/>
+                                <DateTimePicker label="Schedule Your Message" className="timepicker" value={value} onChange={setSelectedDate}/>
                             </DemoContainer>
                         </LocalizationProvider>
                         </div>
