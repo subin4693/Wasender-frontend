@@ -150,9 +150,10 @@ export default function ReplyPage() {
                           onClick={() => {
                             // handleEditContact(data);
                             navigate(`../editreply/${data._id}`);
+                            console.log(data);
                           }}
                           className="rocketBtn"
-                          style={{ backgroundColor: "yellow" }}
+                          style={{ backgroundColor: "blue" }}
                         >
                           <span className="rocketIcon">
                             <ModeEditIcon id="rocketIcon" />
