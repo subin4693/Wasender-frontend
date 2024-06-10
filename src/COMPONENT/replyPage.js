@@ -145,6 +145,7 @@ export default function ReplyPage() {
                       <td>{HandleFrom(data)}</td>
                       <td>{data.to.label}</td>
                       <td>{data.type}</td>
+                      {/*<td>{data.body}</td>*/}
                       <td className="tdE">
                         <button
                           onClick={() => {

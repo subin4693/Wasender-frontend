@@ -1,13 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import SpaIcon from "@mui/icons-material/Spa";
 import MailIcon from "@mui/icons-material/Mail";
 import KeyIcon from "@mui/icons-material/Key";
 import LoginIcon from "@mui/icons-material/Login";
 import "../SCSS/registerPage.scss";
 import { useNavigate } from "react-router-dom";
+import { linkNode } from "../nodelink";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { setUserDetails } from "../reactRedux/action";
 
 export default function RegisterPage() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      await axios
+        .post(`${linkNode}/signin`, {
+          email,
+          password,
+        })
+        .then((res) => {
+          console.log(res.data.data);
+          dispatch(setUserDetails(res.data.data));
+          navigate("/filearea/dashboard");
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <div className="registerPage">
@@ -27,7 +54,11 @@ export default function RegisterPage() {
               <span className="mailSpan">
                 <MailIcon id="mailIcon" />
               </span>
-              <input type="text" className="mailInput" />
+              <input
+                type="text"
+                className="mailInput"
+                onChange={(e) => setEmail(e.target.value)}
+              />
             </div>
           </div>
           <div className="passwordDiv">
@@ -35,25 +66,29 @@ export default function RegisterPage() {
               <span className="passwordSpan">
                 <KeyIcon />
               </span>
-              <input type="text" className="passwordInput" />
+              <input
+                type="text"
+                className="passwordInput"
+                onChange={(e) => setPassword(e.target.value)}
+              />
             </div>
           </div>
           <div className="forgot">Forgot Password ?</div>
-          <div
-            className="signInDiv"
-            onClick={() => {
-              navigate("/filearea/dashboard");
-            }}
-          >
+          <div className="signInDiv" onClick={handleSubmit}>
             Sign In
           </div>
           <div className="noDiv">
             <hr></hr>
             <span className="noDivTitle">Don't have an Account?</span>
           </div>
-          <div className="signUpDiv" onClick={() => {
+          <div
+            className="signUpDiv"
+            onClick={() => {
               navigate("/SignUp");
-            }}>Sign Up</div>
+            }}
+          >
+            Sign Up
+          </div>
         </div>
       </div>
     </>

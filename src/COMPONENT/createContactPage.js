@@ -14,6 +14,7 @@ export default function CreateContactPage() {
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
   const { contact } = selector;
+  const user = useSelector((state) => state.userReducer);
 
   useEffect(() => {
     try {
@@ -36,10 +37,12 @@ export default function CreateContactPage() {
           name: name,
           number: number,
         };
-        await axios.post(`${linkNode}/setcontacts`, dataObj).then((res) => {
-          console.log(res.data.message);
-          navigate("../contacts");
-        });
+        await axios
+          .post(`${linkNode}/setcontacts`, { ...dataObj, user })
+          .then((res) => {
+            console.log(res.data.message);
+            navigate("../contacts");
+          });
       } else {
         console.log(name, number);
 

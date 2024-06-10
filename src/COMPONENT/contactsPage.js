@@ -5,7 +5,7 @@ import { DeleteRounded } from "@mui/icons-material";
 import "../SCSS/addDevicePage.scss";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { funSetContact } from "../reactRedux/action";
 import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
@@ -17,6 +17,7 @@ export default function ContactsPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [status, setStatus] = useState(false);
+  const user = useSelector((state) => state.userReducer);
 
   useEffect(() => {
     try {
@@ -38,7 +39,7 @@ export default function ContactsPage() {
 
   const handleGetContacts = async () => {
     try {
-      await axios.post(`${linkNode}/getcontacts`).then((res) => {
+      await axios.post(`${linkNode}/getcontacts`, { user }).then((res) => {
         console.log(res.data.msgArr);
         setDevices(res.data?.msgArr?.reverse());
       });
@@ -49,8 +50,7 @@ export default function ContactsPage() {
 
   const handleDeleteContacts = async (data) => {
     try {
-      
-      await axios.post(`${linkNode}/delcontacts`, {data} ).then((res) => {
+      await axios.post(`${linkNode}/delcontacts`, { data }).then((res) => {
         setStatus(true);
         console.log(data.contactID);
       });

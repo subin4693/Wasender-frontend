@@ -5,13 +5,13 @@ import { useNavigate } from "react-router-dom";
 import { linkNode } from "../nodelink";
 import axios from "axios";
 import "../SCSS/contactsPage.scss";
-
-
+import { useSelector, useDispatch } from "react-redux";
 
 export default function AddDevicesPage() {
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
+  const user = useSelector((state) => state.userReducer.user);
 
   useEffect(() => {
     try {
@@ -23,7 +23,7 @@ export default function AddDevicesPage() {
   const handleSubmit = async () => {
     try {
       await axios
-        .post(`${linkNode}/setdevice`, {name, number })
+        .post(`${linkNode}/setdevice`, { name, number, user })
         .then((res) => {
           console.log(res.data.message);
           navigate("../devices");

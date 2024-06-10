@@ -19,3 +19,24 @@ export const funSetDevice = (data) => {
     console.log(err);
   }
 };
+
+export const setUserDetails = (data) => {
+  try {
+    return {
+      type: "SETUSER",
+      payload: data,
+    };
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// export const setUserDetails = (data) => {
+//   try {
+//     return {
+//       type: "GETUSER",
+//     };
+//   } catch (err) {
+//     console.log(err);
+//   }
+// };
