@@ -16,11 +16,13 @@ import axios from "axios";
 import FileBase64 from "react-file-base64";
 import { data } from "@tensorflow/tfjs";
 import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function SendPage() {
   const [show, setShow] = useState("chat");
   const [selected, setSelected] = useState([]);
   const [selectedOption, setSelectedOption] = useState(null);
+  const user = useSelector((state) => state.userReducer.user);
   const options = [
     { label: "Grapes", value: "grapes" },
     { label: "Mango", value: "mango" },
@@ -70,7 +72,7 @@ export default function SendPage() {
 
   const handleGetDevicesApi = async () => {
     try {
-      await axios.post(`${linkNode}/getdevice`).then((res) => {
+      await axios.post(`${linkNode}/getdevice`, { user }).then((res) => {
         setDevices(res.data.arrData);
         //fromOptions
         let fromData = res.data.arrData;
@@ -89,7 +91,7 @@ export default function SendPage() {
         //
         setFromOptions(finalFrom);
       });
-      await axios.post(`${linkNode}/getcontacts`).then((res) => {
+      await axios.post(`${linkNode}/getcontacts`, { user }).then((res) => {
         setContacts(res.data?.msgArr?.reverse());
         //ToOptions
         let toData = res.data?.msgArr?.reverse();
@@ -121,7 +123,7 @@ export default function SendPage() {
         // latText,
         // lgnText,
         // base,
-        docTitle
+        docTitle,
       );
       let dataObj = {
         from: selectedOption,

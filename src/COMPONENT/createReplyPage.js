@@ -15,6 +15,7 @@ import { linkNode } from "../nodelink";
 import axios from "axios";
 import FileBase64 from "react-file-base64";
 import { useNavigate, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function CreateReplyPage() {
     const [show, setShow] = useState("chat");
@@ -32,6 +33,8 @@ export default function CreateReplyPage() {
     const params = useParams();
     const [editType, setEditType] = useState(false);
 
+    const user = useSelector((state) => state.userReducer.user);
+
     useEffect(() => {
         try {
             handleGetDevicesApi();
@@ -47,7 +50,7 @@ export default function CreateReplyPage() {
 
     const handleGetDevicesApi = async () => {
         try {
-            await axios.post(`${linkNode}/getdevice`).then((res) => {
+            await axios.post(`${linkNode}/getdevice`, { user }).then((res) => {
                 // setDevices(res.data.arrData);
                 //fromOptions
                 let fromData = res.data.arrData;
@@ -66,23 +69,25 @@ export default function CreateReplyPage() {
                 //
                 setFromOptions(finalFrom);
             });
-            await axios.post(`${linkNode}/getcontacts`).then((res) => {
-                // setContacts(res.data?.msgArr?.reverse());
-                //ToOptions
-                let toData = res.data?.msgArr?.reverse();
-                let toFrom = [];
+            await axios
+                .post(`${linkNode}/getcontacts`, { user })
+                .then((res) => {
+                    // setContacts(res.data?.msgArr?.reverse());
+                    //ToOptions
+                    let toData = res.data?.msgArr?.reverse();
+                    let toFrom = [];
 
-                for (let i = 0; i < toData.length; i++) {
-                    toFrom.push({
-                        label: toData[i].name,
-                        value: toData[i].number,
-                        name: toData[i].name,
-                        number: toData[i].number,
-                    });
-                }
-                //
-                setToOptions(toFrom);
-            });
+                    for (let i = 0; i < toData.length; i++) {
+                        toFrom.push({
+                            label: toData[i].name,
+                            value: toData[i].number,
+                            name: toData[i].name,
+                            number: toData[i].number,
+                        });
+                    }
+                    //
+                    setToOptions(toFrom);
+                });
         } catch (err) {
             console.log(err);
         }
@@ -122,7 +127,7 @@ export default function CreateReplyPage() {
                             let list = new DataTransfer();
                             let file = new File(
                                 [dataObj.file],
-                                dataObj.fileName
+                                dataObj.fileName,
                             );
                             list.items.add(file);
 
@@ -346,7 +351,7 @@ export default function CreateReplyPage() {
                                                         value={bodyText}
                                                         onChange={(e) => {
                                                             setBodyText(
-                                                                e.target.value
+                                                                e.target.value,
                                                             );
                                                         }}
                                                     ></textarea>
@@ -378,7 +383,7 @@ export default function CreateReplyPage() {
                                                             console.log(e.name);
                                                             setDocTitle(e.name);
                                                             console.log(
-                                                                e.base64
+                                                                e.base64,
                                                             );
                                                             setBase(e.base64);
                                                         }}
@@ -397,7 +402,7 @@ export default function CreateReplyPage() {
                                                         value={bodyText}
                                                         onChange={(e) => {
                                                             setBodyText(
-                                                                e.target.value
+                                                                e.target.value,
                                                             );
                                                         }}
                                                     ></textarea>
@@ -442,7 +447,7 @@ export default function CreateReplyPage() {
                                                         value={bodyText}
                                                         onChange={(e) => {
                                                             setBodyText(
-                                                                e.target.value
+                                                                e.target.value,
                                                             );
                                                         }}
                                                     />
@@ -465,7 +470,7 @@ export default function CreateReplyPage() {
                                                         value={latText}
                                                         onChange={(e) => {
                                                             setLatText(
-                                                                e.target.value
+                                                                e.target.value,
                                                             );
                                                         }}
                                                     />
@@ -482,7 +487,7 @@ export default function CreateReplyPage() {
                                                         value={lgnText}
                                                         onChange={(e) => {
                                                             setLgnText(
-                                                                e.target.value
+                                                                e.target.value,
                                                             );
                                                         }}
                                                     />
@@ -498,7 +503,7 @@ export default function CreateReplyPage() {
                                                         value={bodyText}
                                                         onChange={(e) => {
                                                             setBodyText(
-                                                                e.target.value
+                                                                e.target.value,
                                                             );
                                                         }}
                                                     ></textarea>

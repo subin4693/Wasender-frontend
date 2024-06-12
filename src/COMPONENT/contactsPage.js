@@ -17,7 +17,7 @@ export default function ContactsPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [status, setStatus] = useState(false);
-  const user = useSelector((state) => state.userReducer);
+  const user = useSelector((state) => state.userReducer.user);
 
   useEffect(() => {
     try {

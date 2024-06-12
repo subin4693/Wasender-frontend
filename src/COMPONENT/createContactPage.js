@@ -14,7 +14,7 @@ export default function CreateContactPage() {
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
   const { contact } = selector;
-  const user = useSelector((state) => state.userReducer);
+  const user = useSelector((state) => state.userReducer.user);
 
   useEffect(() => {
     try {

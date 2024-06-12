@@ -20,6 +20,7 @@ import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
+import { useSelector } from "react-redux";
 
 export default function Schedulers() {
     const [show, setShow] = useState("chat");
@@ -58,6 +59,8 @@ export default function Schedulers() {
     const [value, setValue] = useState(null);
     const [selectedDate, setSelectedDate] = useState(null);
 
+    const user = useSelector((state) => state.userReducer.user);
+
     //   function alert() {
     //     alert("It's 3PM!");
     //   }
@@ -84,7 +87,7 @@ export default function Schedulers() {
 
     const handleGetDevicesApi = async () => {
         try {
-            await axios.post(`${linkNode}/getdevice`).then((res) => {
+            await axios.post(`${linkNode}/getdevice`, { user }).then((res) => {
                 setDevices(res.data.arrData);
                 //fromOptions
                 let fromData = res.data.arrData;
@@ -103,23 +106,25 @@ export default function Schedulers() {
                 //
                 setFromOptions(finalFrom);
             });
-            await axios.post(`${linkNode}/getcontacts`).then((res) => {
-                setContacts(res.data?.msgArr?.reverse());
-                //ToOptions
-                let toData = res.data?.msgArr?.reverse();
-                let toFrom = [];
+            await axios
+                .post(`${linkNode}/getcontacts`, { user })
+                .then((res) => {
+                    setContacts(res.data?.msgArr?.reverse());
+                    //ToOptions
+                    let toData = res.data?.msgArr?.reverse();
+                    let toFrom = [];
 
-                for (let i = 0; i < toData.length; i++) {
-                    toFrom.push({
-                        label: toData[i].name,
-                        value: toData[i].number,
-                        name: toData[i].name,
-                        number: toData[i].number,
-                    });
-                }
-                //
-                setToOptions(toFrom);
-            });
+                    for (let i = 0; i < toData.length; i++) {
+                        toFrom.push({
+                            label: toData[i].name,
+                            value: toData[i].number,
+                            name: toData[i].name,
+                            number: toData[i].number,
+                        });
+                    }
+                    //
+                    setToOptions(toFrom);
+                });
         } catch (err) {
             console.log(err);
         }

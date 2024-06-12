@@ -16,7 +16,7 @@ export default function DevicesPage() {
   const [devices, setDevices] = useState([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const user = useSelector((state) => state.userReducer);
+  const user = useSelector((state) => state.userReducer.user);
 
   useEffect(() => {
     try {
