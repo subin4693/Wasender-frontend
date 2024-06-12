@@ -39,7 +39,9 @@ export default function DevicesPage() {
   return (
     <div className="devicesPage">
       <div className="header">
-        <div className="headerTitle">Devices</div>
+        <div className="headerTitle">
+          {user.role === "admin" ? "Admin " : "User "}Devices
+        </div>
         <div className="addTitle">
           <button
             className="addBtn"

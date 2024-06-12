@@ -72,7 +72,9 @@ export default function ContactsPage() {
   return (
     <div className="contactsPage">
       <div className="header">
-        <div className="headerTitle">Contacts</div>
+        <div className="headerTitle">
+          {user.role === "admin" ? "Admin " : "User "}Contacts
+        </div>
         <div className="addTitle">
           <button
             className="addBtn bulk"
