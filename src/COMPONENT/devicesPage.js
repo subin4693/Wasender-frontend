@@ -105,7 +105,7 @@ export default function DevicesPage() {
                           className="rocketBtn"
                           onClick={() => {
                             dispatch(funSetDevice(data));
-                            navigate("../managedevices");
+                            navigate(`../managedevices/${data._id}`);
                           }}
                         >
                           <span className="rocketIcon">

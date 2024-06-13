@@ -18,6 +18,7 @@ export default function RegisterPage() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    console.log("signin called");
 
     try {
       await axios

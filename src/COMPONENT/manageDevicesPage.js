@@ -18,6 +18,7 @@ import HourglassBottomIcon from "@mui/icons-material/HourglassBottom";
 import DangerousIcon from "@mui/icons-material/Dangerous";
 import CrisisAlertIcon from "@mui/icons-material/CrisisAlert";
 // import { Buffer } from "buffer";
+import { useParams } from "react-router-dom";
 
 export default function ManageDevicesPage() {
   const device = useSelector((state) => state.contactReducer.device);
@@ -25,10 +26,37 @@ export default function ManageDevicesPage() {
   const [chance, setChance] = useState(false);
   const [showQr, setShowQr] = useState(true);
   const [qqq, setq] = useState("");
-  const insID = "instance77326";
-  const insTok = "tz4c7nm9r4luh6i4";
+  const [insID, setInsID] = useState("");
+  const [insTok, setInsTok] = useState("");
+  // const insID = "instance77326";
+  // const insTok = "tz4c7nm9r4luh6i4";
   const dispatch = useDispatch();
   const [status, setStatus] = useState(false);
+  const { id } = useParams();
+
+  useEffect(() => {
+    console.log("device )))))))))))))))))))))))))");
+    console.log(device);
+    console.log("device )))))))))))))))))))))))))");
+
+    setInsID(device.instanceID);
+    setInsTok(device.token);
+
+    // if (device && device.length > 0) {
+    //   device.forEach((dev) => {
+    //     if (dev._id == id) {
+    //       setInsID(dev.instanceID);
+    //       setInsTok(dev.deviceID);
+    //       console.log(dev.instanceID);
+    //       console.log(dev.deviceID);
+    //     }
+    //     // if (dev.instanceID && dev.instanceToken) {
+    //     //   setInsID(dev.instanceID);
+    //     //   setInsTok(dev.instanceToken);
+    //     // }
+    //   });
+    // }
+  }, []);
 
   useEffect(() => {
     try {
@@ -91,15 +119,17 @@ export default function ManageDevicesPage() {
   // };
 
   const handleVerify = () => {
+    console.log(insID);
+    console.log(insTok);
     try {
       let config = {
         method: "get",
-        url: "https://api.ultramsg.com/instance77326/instance/qr",
+        url: `https://api.ultramsg.com/${insID}/instance/qr`,
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
         },
         params: {
-          token: "tz4c7nm9r4luh6i4",
+          token: insTok,
         },
       };
 

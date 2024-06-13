@@ -328,7 +328,7 @@ export default function FileArea() {
             <Route path="/admincontacts" element={<AdminContactsPage />} /> */}
                         <Route path="/devices" element={<DevicesPage />} />
                         <Route
-                            path="/managedevices"
+                            path="/managedevices/:id"
                             element={<ManageDevicesPage />}
                         />
                         <Route path="/adddevice" element={<AddDevicesPage />} />

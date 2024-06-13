@@ -82,7 +82,7 @@ export default function LogPage() {
   const handleLogMessages = async (obj) => {
     try {
       console.log(obj);
-      await axios.post(`${linkNode}/logmsg`, {obj}).then((res) => {
+      await axios.post(`${linkNode}/logmsg`, { obj }).then((res) => {
         let msgArr = res?.data?.message?.messages;
         setMessages(msgArr);
       });
@@ -182,8 +182,8 @@ export default function LogPage() {
                             {data.body
                               ? data.body
                               : data.metadata
-                              ? JSON.stringify(data.metadata)
-                              : ""}
+                                ? JSON.stringify(data.metadata)
+                                : ""}
                           </td>
                         </tr>
                       );
