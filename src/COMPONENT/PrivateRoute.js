@@ -1,35 +1,19 @@
 import React from "react";
-import { Navigate, Route } from "react-router-dom";
+import { Navigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-const PrivateRoute = ({ element: Element, adminOnly, ...rest }) => {
-    const isAuthenticated = () => {
-        const token = localStorage.getItem("token");
-        return token ? true : false;
-    };
+const PrivateRoute = ({ children }) => {
+    const user = useSelector((state) => state.userReducer.user);
 
-    const isAdmin = () => {
-        const userRole = localStorage.getItem("userRole");
-        return userRole === "admin";
-    };
-
-    return (
-        <div></div>
-
-        // <Route
-        //     {...rest}
-        //     element={
-        //         isAuthenticated() ? (
-        //             adminOnly && !isAdmin() ? (
-        //                 <Navigate to="/signup" />
-        //             ) : (
-        //                 <Element adminOnly={adminOnly && isAdmin()} />
-        //             )
-        //         ) : (
-        //             <Navigate to="/register" />
-        //         )
-        //     }
-        // />
-    );
+    if (user?.id) {
+        return <>{children}</>;
+    } else {
+        return (
+            <>
+                <Navigate to="/" />
+            </>
+        );
+    }
 };
 
 export default PrivateRoute;
