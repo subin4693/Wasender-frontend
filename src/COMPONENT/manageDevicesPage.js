@@ -144,16 +144,17 @@ export default function ManageDevicesPage() {
           let startFun = async () => {
             i++;
             console.log(i);
-            if (i === 20) {
+            if (i === 40) {
               clearInterval(startRun);
               await handleInstanceStatus(device);
+
               setChance(false);
               //instance status
               //handleInstanceStatus(dataObj);
               //
             }
           };
-          let startRun = setInterval(startFun, 1000);
+          let startRun = setInterval(startFun, 2000);
 
           // await
         })
@@ -167,9 +168,12 @@ export default function ManageDevicesPage() {
 
   const handleInstanceStatus = async (dataObj) => {
     try {
-      console.log(dataObj);
       await axios.post(`${linkNode}/instance`, dataObj).then(async (res) => {
-        console.log(res.data.message);
+        console.log("***************");
+
+        console.log(res.data);
+        console.log("***************");
+
         if (res.data?.message === "authenticated") {
           setAuth(true);
           dispatch(funSetDevice({ ...dataObj, authenthicate: true }));
