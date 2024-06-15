@@ -29,6 +29,7 @@ export default function DevicesPage() {
   const handleGetDevicesApi = async () => {
     try {
       await axios.post(`${linkNode}/getdevice`, { user }).then((res) => {
+        console.log(res.data.arrData);
         setDevices(res.data.arrData);
       });
     } catch (err) {

@@ -9,6 +9,8 @@ import CallReceivedIcon from "@mui/icons-material/CallReceived";
 import { linkNode } from "../nodelink";
 import axios from "axios";
 
+import { useSelector } from "react-redux";
+
 export default function LogPage() {
   const [show, setShow] = useState("Messages");
   const [messages, setMessages] = useState([]);
@@ -17,6 +19,8 @@ export default function LogPage() {
   const [toOptions, setToOptions] = useState([]);
   const [fromSelect, setFromSelect] = useState(null);
   const [toSelect, setToSelect] = useState(null);
+
+  const user = useSelector((state) => state.userReducer.user);
 
   useEffect(() => {
     try {
@@ -38,9 +42,10 @@ export default function LogPage() {
 
   const handleGetDevicesApi = async () => {
     try {
-      await axios.post(`${linkNode}/getdevice`).then((res) => {
+      await axios.post(`${linkNode}/getdevice`, { user }).then((res) => {
         //fromOptions
         //console.log(res.data.arrData);
+        console.log(res.data);
         let fromData = res.data.arrData;
         let finalFrom = [];
 
@@ -58,7 +63,7 @@ export default function LogPage() {
         setFromOptions(finalFrom);
       });
 
-      await axios.post(`${linkNode}/getcontacts`).then((res) => {
+      await axios.post(`${linkNode}/getcontacts`, { user }).then((res) => {
         //ToOptions
         let toData = res.data?.msgArr?.reverse();
         let toFrom = [];
@@ -93,13 +98,20 @@ export default function LogPage() {
 
   const handleLogChats = async () => {
     try {
-      //console.log(fromSelect, toSelect);
+      console.log("****************");
+      console.log(fromSelect, toSelect);
+      console.log("****************");
+
       await axios
         .post(`${linkNode}/logchat`, { fromSelect, toSelect })
         .then((res) => {
           console.log(res.data.message);
           let msgArr = res?.data?.message;
-          setChats(msgArr?.reverse());
+
+          console.log(msgArr);
+
+          if (msgArr.length > 0) setChats(msgArr?.reverse());
+          else setChats([]);
         });
     } catch (err) {
       console.log(err);
