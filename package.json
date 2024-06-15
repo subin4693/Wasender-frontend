@@ -70,6 +70,7 @@
   },
   "devDependencies": {
     "sass": "^1.70.0",
-    "video.js": "^8.9.0"
+    "video.js": "^8.9.0",
+    "@babel/plugin-proposal-private-property-in-object": "^7.18.6"
   }
 }
