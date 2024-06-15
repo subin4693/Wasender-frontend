@@ -28,7 +28,6 @@ const CreateAccount = () => {
                     password,
                 })
                 .then((res) => {
-                    console.log(res.data.data);
                     dispatch(setUserDetails(res.data.data));
 
                     navigate("/filearea/dashboard");

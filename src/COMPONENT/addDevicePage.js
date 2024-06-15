@@ -25,7 +25,6 @@ export default function AddDevicesPage() {
       await axios
         .post(`${linkNode}/setdevice`, { name, number, user })
         .then((res) => {
-          console.log(res.data.message);
           navigate("../devices");
         });
     } catch (err) {

@@ -18,7 +18,6 @@ export default function CreateContactPage() {
 
   useEffect(() => {
     try {
-      console.log(contact);
       if (contact) {
         setName(contact.name);
         setNumber(contact.number);
@@ -31,7 +30,6 @@ export default function CreateContactPage() {
   let handleSubmit = async () => {
     try {
       if (!contact) {
-        console.log(name, number);
 
         let dataObj = {
           name: name,
@@ -40,11 +38,9 @@ export default function CreateContactPage() {
         await axios
           .post(`${linkNode}/setcontacts`, { ...dataObj, user })
           .then((res) => {
-            console.log(res.data.message);
             navigate("../contacts");
           });
       } else {
-        console.log(name, number);
 
         let dataObj = {
           name: name,
@@ -53,7 +49,6 @@ export default function CreateContactPage() {
         await axios
           .post(`${linkNode}/editcontacts`, { dataObj, contact })
           .then((res) => {
-            console.log(res.data.message);
             navigate("../contacts");
           });
       }

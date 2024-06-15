@@ -1,7 +1,7 @@
 import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 // import FileArea from "./components/fileArea";
-import { Provider, useDispatch } from "react-redux";
+import { Provider } from "react-redux";
 import RegisterPage from "./COMPONENT/registerPage";
 import SignUpPage from "./COMPONENT/createAccount";
 import FileArea from "./COMPONENT/fileArea";

@@ -39,7 +39,6 @@ export default function CreateReplyPage() {
         try {
             handleGetDevicesApi();
             if (params?.id) {
-                console.log(params.id);
                 setEditType(true);
                 handleGetReply(params.id);
             }
@@ -98,7 +97,6 @@ export default function CreateReplyPage() {
             await axios
                 .post(`${linkNode}/idreply`, { id })
                 .then((res) => {
-                    console.log(res.data);
                     let dataObj = res.data?.msg;
                     if (dataObj) {
                         setShow(dataObj.type);
@@ -114,7 +112,6 @@ export default function CreateReplyPage() {
                             });
                         }
                         setSelected(fromObj);
-                        console.log(dataObj.to);
                         setSelectedOption(dataObj.to);
                         setBodyText(dataObj.body);
                         setDocTitle(dataObj.fileName);
@@ -127,7 +124,7 @@ export default function CreateReplyPage() {
                             let list = new DataTransfer();
                             let file = new File(
                                 [dataObj.file],
-                                dataObj.fileName,
+                                dataObj.fileName
                             );
                             list.items.add(file);
 
@@ -164,7 +161,6 @@ export default function CreateReplyPage() {
             await axios
                 .post(`${linkNode}/createreply`, { dataObj, user })
                 .then((res) => {
-                    console.log(res.data);
                     navigate("../reply");
                 });
         } catch (err) {
@@ -188,10 +184,8 @@ export default function CreateReplyPage() {
             await axios
                 .post(`${linkNode}/editreply`, { id: params.id, dataObj })
                 .then((res) => {
-                    console.log(res.data);
                     navigate("../reply");
                 });
-            console.log(dataObj);
         } catch (err) {
             console.log(err);
         }
@@ -353,7 +347,7 @@ export default function CreateReplyPage() {
                                                         value={bodyText}
                                                         onChange={(e) => {
                                                             setBodyText(
-                                                                e.target.value,
+                                                                e.target.value
                                                             );
                                                         }}
                                                     ></textarea>
@@ -382,11 +376,8 @@ export default function CreateReplyPage() {
                                                     <FileBase64
                                                         value={docTitle}
                                                         onDone={(e) => {
-                                                            console.log(e.name);
                                                             setDocTitle(e.name);
-                                                            console.log(
-                                                                e.base64,
-                                                            );
+
                                                             setBase(e.base64);
                                                         }}
                                                         id="baseFile"
@@ -404,7 +395,7 @@ export default function CreateReplyPage() {
                                                         value={bodyText}
                                                         onChange={(e) => {
                                                             setBodyText(
-                                                                e.target.value,
+                                                                e.target.value
                                                             );
                                                         }}
                                                     ></textarea>
@@ -449,7 +440,7 @@ export default function CreateReplyPage() {
                                                         value={bodyText}
                                                         onChange={(e) => {
                                                             setBodyText(
-                                                                e.target.value,
+                                                                e.target.value
                                                             );
                                                         }}
                                                     />
@@ -472,7 +463,7 @@ export default function CreateReplyPage() {
                                                         value={latText}
                                                         onChange={(e) => {
                                                             setLatText(
-                                                                e.target.value,
+                                                                e.target.value
                                                             );
                                                         }}
                                                     />
@@ -489,7 +480,7 @@ export default function CreateReplyPage() {
                                                         value={lgnText}
                                                         onChange={(e) => {
                                                             setLgnText(
-                                                                e.target.value,
+                                                                e.target.value
                                                             );
                                                         }}
                                                     />
@@ -505,7 +496,7 @@ export default function CreateReplyPage() {
                                                         value={bodyText}
                                                         onChange={(e) => {
                                                             setBodyText(
-                                                                e.target.value,
+                                                                e.target.value
                                                             );
                                                         }}
                                                     ></textarea>
@@ -520,10 +511,8 @@ export default function CreateReplyPage() {
                                             className="sendDivbtn"
                                             onClick={() => {
                                                 if (editType) {
-                                                    console.log("edit");
                                                     handleEdit();
                                                 } else {
-                                                    console.log("new");
                                                     handleSend();
                                                 }
                                             }}
