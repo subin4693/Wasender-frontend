@@ -42,6 +42,7 @@ export default function LogPage() {
 
   const handleGetDevicesApi = async () => {
     try {
+      console.log(user);
       await axios.post(`${linkNode}/getdevice`, { user }).then((res) => {
         //fromOptions
         //console.log(res.data.arrData);

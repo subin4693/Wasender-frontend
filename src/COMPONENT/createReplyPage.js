@@ -161,10 +161,12 @@ export default function CreateReplyPage() {
                 lng: lgnText,
                 type: show,
             };
-            await axios.post(`${linkNode}/createreply`, dataObj).then((res) => {
-                console.log(res.data);
-                navigate("../reply");
-            });
+            await axios
+                .post(`${linkNode}/createreply`, { dataObj, user })
+                .then((res) => {
+                    console.log(res.data);
+                    navigate("../reply");
+                });
         } catch (err) {
             console.log(err);
         }

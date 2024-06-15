@@ -11,6 +11,7 @@ import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
 import { linkNode } from "../nodelink";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 export default function ReplyPage() {
   // const [devices, setDevices] = useState([]);
@@ -18,6 +19,7 @@ export default function ReplyPage() {
   const navigate = useNavigate();
   // const dispatch = useDispatch();
   const [status, setStatus] = useState(false);
+  const user = useSelector((state) => state.userReducer.user);
 
   useEffect(() => {
     try {
@@ -39,7 +41,7 @@ export default function ReplyPage() {
 
   const handleGetReply = async () => {
     try {
-      await axios.post(`${linkNode}/getreply`).then((res) => {
+      await axios.post(`${linkNode}/getreply`, { user }).then((res) => {
         console.log(res.data.msg);
         setMessages(res.data?.msg?.reverse());
       });
