@@ -72,7 +72,7 @@ export default function AddDevicesPage() {
               />
             </div>
           </div>
-          <div
+          <button
             className="submitInDiv"
             onClick={() => {
               handleSubmit();
@@ -80,7 +80,7 @@ export default function AddDevicesPage() {
             }}
           >
             submit
-          </div>
+          </button>
         </div>
       </div>
     </div>

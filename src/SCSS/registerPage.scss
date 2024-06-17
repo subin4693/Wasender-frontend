@@ -118,6 +118,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
   }
   #loginIcon {
     font-size: 13px;
@@ -147,5 +148,6 @@
     justify-content: center;
     align-items: center;
     border: solid 1px gray;
+    cursor: pointer;
   }
 }

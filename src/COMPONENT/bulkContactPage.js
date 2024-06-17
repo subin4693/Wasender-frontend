@@ -55,14 +55,14 @@ export default function BulkContactPage() {
                         </div>
                     </div>
 
-                    <div
+                    <button
                         className="submitInDiv"
                         onClick={() => {
                             handleImportNumber();
                         }}
                     >
                         Import Contacts
-                    </div>
+                    </button>
                 </div>
             </div>
             {/* <div className="bodyB">

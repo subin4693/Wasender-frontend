@@ -30,7 +30,6 @@ export default function CreateContactPage() {
   let handleSubmit = async () => {
     try {
       if (!contact) {
-
         let dataObj = {
           name: name,
           number: number,
@@ -41,7 +40,6 @@ export default function CreateContactPage() {
             navigate("../contacts");
           });
       } else {
-
         let dataObj = {
           name: name,
           number: number,
@@ -98,14 +96,14 @@ export default function CreateContactPage() {
               />
             </div>
           </div>
-          <div
+          <button
             className="submitInDiv"
             onClick={() => {
               handleSubmit();
             }}
           >
             submit
-          </div>
+          </button>
         </div>
       </div>
     </div>
