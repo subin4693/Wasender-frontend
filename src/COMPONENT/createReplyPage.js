@@ -39,6 +39,10 @@ export default function CreateReplyPage() {
         try {
             handleGetDevicesApi();
             if (params?.id) {
+<<<<<<< HEAD
+=======
+                console.log(params.id);
+>>>>>>> 4a40780c8889de48ef17dbc976686d1b35c7ba12
                 setEditType(true);
                 handleGetReply(params.id);
             }
@@ -97,6 +101,10 @@ export default function CreateReplyPage() {
             await axios
                 .post(`${linkNode}/idreply`, { id })
                 .then((res) => {
+<<<<<<< HEAD
+=======
+                    console.log(res.data);
+>>>>>>> 4a40780c8889de48ef17dbc976686d1b35c7ba12
                     let dataObj = res.data?.msg;
                     if (dataObj) {
                         setShow(dataObj.type);
@@ -112,6 +120,10 @@ export default function CreateReplyPage() {
                             });
                         }
                         setSelected(fromObj);
+<<<<<<< HEAD
+=======
+                        console.log(dataObj.to);
+>>>>>>> 4a40780c8889de48ef17dbc976686d1b35c7ba12
                         setSelectedOption(dataObj.to);
                         setBodyText(dataObj.body);
                         setDocTitle(dataObj.fileName);
@@ -124,7 +136,11 @@ export default function CreateReplyPage() {
                             let list = new DataTransfer();
                             let file = new File(
                                 [dataObj.file],
+<<<<<<< HEAD
                                 dataObj.fileName
+=======
+                                dataObj.fileName,
+>>>>>>> 4a40780c8889de48ef17dbc976686d1b35c7ba12
                             );
                             list.items.add(file);
 
@@ -161,6 +177,10 @@ export default function CreateReplyPage() {
             await axios
                 .post(`${linkNode}/createreply`, { dataObj, user })
                 .then((res) => {
+<<<<<<< HEAD
+=======
+                    console.log(res.data);
+>>>>>>> 4a40780c8889de48ef17dbc976686d1b35c7ba12
                     navigate("../reply");
                 });
         } catch (err) {
@@ -184,8 +204,15 @@ export default function CreateReplyPage() {
             await axios
                 .post(`${linkNode}/editreply`, { id: params.id, dataObj })
                 .then((res) => {
+<<<<<<< HEAD
                     navigate("../reply");
                 });
+=======
+                    console.log(res.data);
+                    navigate("../reply");
+                });
+            console.log(dataObj);
+>>>>>>> 4a40780c8889de48ef17dbc976686d1b35c7ba12
         } catch (err) {
             console.log(err);
         }
@@ -347,7 +374,11 @@ export default function CreateReplyPage() {
                                                         value={bodyText}
                                                         onChange={(e) => {
                                                             setBodyText(
+<<<<<<< HEAD
                                                                 e.target.value
+=======
+                                                                e.target.value,
+>>>>>>> 4a40780c8889de48ef17dbc976686d1b35c7ba12
                                                             );
                                                         }}
                                                     ></textarea>
@@ -376,8 +407,16 @@ export default function CreateReplyPage() {
                                                     <FileBase64
                                                         value={docTitle}
                                                         onDone={(e) => {
+<<<<<<< HEAD
                                                             setDocTitle(e.name);
 
+=======
+                                                            console.log(e.name);
+                                                            setDocTitle(e.name);
+                                                            console.log(
+                                                                e.base64,
+                                                            );
+>>>>>>> 4a40780c8889de48ef17dbc976686d1b35c7ba12
                                                             setBase(e.base64);
                                                         }}
                                                         id="baseFile"
@@ -395,7 +434,11 @@ export default function CreateReplyPage() {
                                                         value={bodyText}
                                                         onChange={(e) => {
                                                             setBodyText(
+<<<<<<< HEAD
                                                                 e.target.value
+=======
+                                                                e.target.value,
+>>>>>>> 4a40780c8889de48ef17dbc976686d1b35c7ba12
                                                             );
                                                         }}
                                                     ></textarea>
@@ -440,7 +483,11 @@ export default function CreateReplyPage() {
                                                         value={bodyText}
                                                         onChange={(e) => {
                                                             setBodyText(
+<<<<<<< HEAD
                                                                 e.target.value
+=======
+                                                                e.target.value,
+>>>>>>> 4a40780c8889de48ef17dbc976686d1b35c7ba12
                                                             );
                                                         }}
                                                     />
@@ -463,7 +510,11 @@ export default function CreateReplyPage() {
                                                         value={latText}
                                                         onChange={(e) => {
                                                             setLatText(
+<<<<<<< HEAD
                                                                 e.target.value
+=======
+                                                                e.target.value,
+>>>>>>> 4a40780c8889de48ef17dbc976686d1b35c7ba12
                                                             );
                                                         }}
                                                     />
@@ -480,7 +531,11 @@ export default function CreateReplyPage() {
                                                         value={lgnText}
                                                         onChange={(e) => {
                                                             setLgnText(
+<<<<<<< HEAD
                                                                 e.target.value
+=======
+                                                                e.target.value,
+>>>>>>> 4a40780c8889de48ef17dbc976686d1b35c7ba12
                                                             );
                                                         }}
                                                     />
@@ -496,7 +551,11 @@ export default function CreateReplyPage() {
                                                         value={bodyText}
                                                         onChange={(e) => {
                                                             setBodyText(
+<<<<<<< HEAD
                                                                 e.target.value
+=======
+                                                                e.target.value,
+>>>>>>> 4a40780c8889de48ef17dbc976686d1b35c7ba12
                                                             );
                                                         }}
                                                     ></textarea>
@@ -511,8 +570,15 @@ export default function CreateReplyPage() {
                                             className="sendDivbtn"
                                             onClick={() => {
                                                 if (editType) {
+<<<<<<< HEAD
                                                     handleEdit();
                                                 } else {
+=======
+                                                    console.log("edit");
+                                                    handleEdit();
+                                                } else {
+                                                    console.log("new");
+>>>>>>> 4a40780c8889de48ef17dbc976686d1b35c7ba12
                                                     handleSend();
                                                 }
                                             }}
@@ -533,4 +599,8 @@ export default function CreateReplyPage() {
             </div>
         </div>
     );
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 4a40780c8889de48ef17dbc976686d1b35c7ba12
