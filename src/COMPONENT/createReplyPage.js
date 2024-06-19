@@ -16,7 +16,8 @@ import axios from "axios";
 import FileBase64 from "react-file-base64";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-
+import useFirebaseUpload from "../hooks/use-firebaseUpload";
+import Loading from "./loader";
 export default function CreateReplyPage() {
     const [show, setShow] = useState("chat");
     const [selected, setSelected] = useState([]);
@@ -32,8 +33,19 @@ export default function CreateReplyPage() {
     const navigate = useNavigate();
     const params = useParams();
     const [editType, setEditType] = useState(false);
-
+    const [file, setFile] = useState(null);
+    const [url, setUrl] = useState("");
     const user = useSelector((state) => state.userReducer.user);
+    const { progress, error, downloadURL, fileName } = useFirebaseUpload(file);
+    useEffect(() => {
+        if (error) {
+            console.log(error);
+            return alert("Try again later");
+        } else if (downloadURL) {
+            setUrl(downloadURL);
+            setDocTitle(fileName);
+        }
+    }, [error, downloadURL]);
 
     useEffect(() => {
         try {
@@ -124,7 +136,7 @@ export default function CreateReplyPage() {
                             let list = new DataTransfer();
                             let file = new File(
                                 [dataObj.file],
-                                dataObj.fileName
+                                dataObj.fileName,
                             );
                             list.items.add(file);
 
@@ -347,7 +359,7 @@ export default function CreateReplyPage() {
                                                         value={bodyText}
                                                         onChange={(e) => {
                                                             setBodyText(
-                                                                e.target.value
+                                                                e.target.value,
                                                             );
                                                         }}
                                                     ></textarea>
@@ -373,14 +385,25 @@ export default function CreateReplyPage() {
                                                     className="spanB"
                                                     id="spanBase"
                                                 >
-                                                    <FileBase64
-                                                        value={docTitle}
-                                                        onDone={(e) => {
-                                                            setDocTitle(e.name);
+                                                    {/*    <FileBase64
+                                                         value={docTitle}
+                                                         onDone={(e) => {
+                                                             setDocTitle(e.name);
 
-                                                            setBase(e.base64);
+                                                             setBase(e.base64);
+                                                         }}
+                                                         id="baseFile"
+                                                    />*/}
+                                                    <input
+                                                        type="file"
+                                                        className="fileInput"
+                                                        onChange={(e) => {
+                                                            // handleUpload(e);
+                                                            setFile(
+                                                                e.target
+                                                                    .files[0],
+                                                            );
                                                         }}
-                                                        id="baseFile"
                                                     />
                                                 </div>
                                             </div>
@@ -395,7 +418,7 @@ export default function CreateReplyPage() {
                                                         value={bodyText}
                                                         onChange={(e) => {
                                                             setBodyText(
-                                                                e.target.value
+                                                                e.target.value,
                                                             );
                                                         }}
                                                     ></textarea>
@@ -416,9 +439,24 @@ export default function CreateReplyPage() {
                                                     :
                                                 </div>
                                                 <div className="spanB">
-                                                    <FileBase64
-                                                        onDone={(e) => {
-                                                            setBase(e.base64);
+                                                    {/*    <FileBase64
+                                                         value={docTitle}
+                                                         onDone={(e) => {
+                                                             setDocTitle(e.name);
+
+                                                             setBase(e.base64);
+                                                         }}
+                                                         id="baseFile"
+                                                    />*/}
+                                                    <input
+                                                        type="file"
+                                                        className="fileInput"
+                                                        onChange={(e) => {
+                                                            // handleUpload(e);
+                                                            setFile(
+                                                                e.target
+                                                                    .files[0],
+                                                            );
                                                         }}
                                                     />
                                                 </div>
@@ -440,7 +478,7 @@ export default function CreateReplyPage() {
                                                         value={bodyText}
                                                         onChange={(e) => {
                                                             setBodyText(
-                                                                e.target.value
+                                                                e.target.value,
                                                             );
                                                         }}
                                                     />
@@ -463,7 +501,7 @@ export default function CreateReplyPage() {
                                                         value={latText}
                                                         onChange={(e) => {
                                                             setLatText(
-                                                                e.target.value
+                                                                e.target.value,
                                                             );
                                                         }}
                                                     />
@@ -480,7 +518,7 @@ export default function CreateReplyPage() {
                                                         value={lgnText}
                                                         onChange={(e) => {
                                                             setLgnText(
-                                                                e.target.value
+                                                                e.target.value,
                                                             );
                                                         }}
                                                     />
@@ -496,7 +534,7 @@ export default function CreateReplyPage() {
                                                         value={bodyText}
                                                         onChange={(e) => {
                                                             setBodyText(
-                                                                e.target.value
+                                                                e.target.value,
                                                             );
                                                         }}
                                                     ></textarea>
@@ -517,12 +555,24 @@ export default function CreateReplyPage() {
                                                 }
                                             }}
                                         >
-                                            <span className="sendIconSpan">
-                                                <SendIcon id="sendIcon" />
-                                            </span>
-                                            <span className="spanTitle">
-                                                {editType ? "Edit" : "Create"}
-                                            </span>
+                                            {progress > 0 && progress < 100 ? (
+                                                <>
+                                                    <Loading /> &nbsp;{" "}
+                                                    {progress}%{" "}
+                                                </>
+                                            ) : (
+                                                <>
+                                                    {" "}
+                                                    <span className="sendIconSpan">
+                                                        <SendIcon id="sendIcon" />
+                                                    </span>
+                                                    <span className="spanTitle">
+                                                        {editType
+                                                            ? "Edit"
+                                                            : "Create"}
+                                                    </span>
+                                                </>
+                                            )}
                                         </div>
                                     </div>
                                 </div>

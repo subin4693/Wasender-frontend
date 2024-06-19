@@ -6,17 +6,26 @@ import axios from "axios";
 import { linkNode } from "../nodelink";
 import { useDispatch } from "react-redux";
 import { setUserDetails } from "../reactRedux/action";
+import Loader from "./loader";
 
 const CreateAccount = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+
         try {
+            setLoading(true);
+            if (!email || password.length < 8 || password.length < 8) {
+                return alert(
+                    "Enter a valid email and password. Password length must be  >= 8",
+                );
+            }
             if (password !== confirmPassword) {
                 alert("Password is not match");
                 return;
@@ -34,6 +43,8 @@ const CreateAccount = () => {
                 });
         } catch (error) {
             console.log(error);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -80,8 +91,22 @@ const CreateAccount = () => {
                             required
                         />
                     </div>
-                    <button type="submit">Create Account</button>
+                    <button type="submit" className="create-account-btn">
+                        {loading ? <Loader /> : "Create Account"}
+                    </button>
                 </form>
+                <div className="noDiv">
+                    <hr></hr>
+                    <span className="noDivTitle">Already have an Account?</span>
+                </div>
+                <div
+                    className="signUpDiv"
+                    onClick={() => {
+                        navigate("/");
+                    }}
+                >
+                    Sign In
+                </div>
             </div>
         </div>
     );

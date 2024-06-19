@@ -14,13 +14,14 @@ import Select from "react-select";
 import { linkNode } from "../nodelink";
 import axios from "axios";
 import FileBase64 from "react-file-base64";
-
+import Loading from "./loader";
 import { useParams } from "react-router-dom";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import { useSelector } from "react-redux";
+import useFirebaseUpload from "../hooks/use-firebaseUpload";
 
 export default function Schedulers() {
     const [show, setShow] = useState("chat");
@@ -58,7 +59,8 @@ export default function Schedulers() {
     const [siteID, setSiteID] = useState(false);
     const [value, setValue] = useState(null);
     const [selectedDate, setSelectedDate] = useState(null);
-
+    const [file, setFile] = useState(null);
+    const [url, setUrl] = useState("");
     const user = useSelector((state) => state.userReducer.user);
 
     //   function alert() {
@@ -68,6 +70,17 @@ export default function Schedulers() {
     //     , timeNow = new Date().getTime()
     //     , offsetMillis = timeAt3pm - timeNow;
     //   setTimeout(alert, offsetMillis);
+    const { progress, error, downloadURL, fileName } = useFirebaseUpload(file);
+
+    useEffect(() => {
+        if (error) {
+            console.log(error);
+            return alert("Try again later");
+        } else if (downloadURL) {
+            setUrl(downloadURL);
+            setDocTitle(fileName);
+        }
+    }, [error, downloadURL]);
 
     useEffect(() => {
         try {
@@ -338,15 +351,26 @@ export default function Schedulers() {
                                                     :
                                                 </div>
                                                 <div className="spanB">
-                                                    <FileBase64
-                                                        onDone={(e) => {
-                                                            console.log(e);
-                                                            console.log(e.name);
-                                                            setDocTitle(e.name);
-                                                            console.log(
-                                                                e.base64,
+                                                    {/*     <FileBase64
+                                                                                                       onDone={(e) => {
+                                                                                                           console.log(e);
+                                                                                                           console.log(e.name);
+                                                                                                           setDocTitle(e.name);
+                                                                                                           console.log(
+                                                                                                               e.base64,
+                                                                                                           );
+                                                                                                           setBase(e.base64);
+                                                                                                       }}
+                                                                                                   />*/}
+                                                    <input
+                                                        type="file"
+                                                        className="fileInput"
+                                                        onChange={(e) => {
+                                                            // handleUpload(e);
+                                                            setFile(
+                                                                e.target
+                                                                    .files[0],
                                                             );
-                                                            setBase(e.base64);
                                                         }}
                                                     />
                                                     {/* <input type="file" className="fileInp ut" /> */}
@@ -384,9 +408,20 @@ export default function Schedulers() {
                                                     :
                                                 </div>
                                                 <div className="spanB">
-                                                    <FileBase64
-                                                        onDone={(e) => {
-                                                            setBase(e.base64);
+                                                    {/*<FileBase64
+                                                                                                            onDone={(e) => {
+                                                                                                                setBase(e.base64);
+                                                                                                            }}
+                                                                                                        />*/}
+                                                    <input
+                                                        type="file"
+                                                        className="fileInput"
+                                                        onChange={(e) => {
+                                                            // handleUpload(e);
+                                                            setFile(
+                                                                e.target
+                                                                    .files[0],
+                                                            );
                                                         }}
                                                     />
                                                     {/* <input type="file" className="fileInput" /> */}
@@ -482,12 +517,22 @@ export default function Schedulers() {
                                                 handleSend();
                                             }}
                                         >
-                                            <span className="sendIconSpan">
-                                                <SendIcon id="sendIcon" />
-                                            </span>
-                                            <span className="spanTitle">
-                                                send
-                                            </span>
+                                            {progress > 0 && progress < 100 ? (
+                                                <>
+                                                    <Loading /> &nbsp;{" "}
+                                                    {progress}%{" "}
+                                                </>
+                                            ) : (
+                                                <>
+                                                    {" "}
+                                                    <span className="sendIconSpan">
+                                                        <SendIcon id="sendIcon" />
+                                                    </span>
+                                                    <span className="spanTitle">
+                                                        send
+                                                    </span>
+                                                </>
+                                            )}
                                         </div>
                                     </div>
                                 </div>

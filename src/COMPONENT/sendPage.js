@@ -17,13 +17,15 @@ import FileBase64 from "react-file-base64";
 import { data } from "@tensorflow/tfjs";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import useFirebaseUpload from "../hooks/use-firebaseUpload";
+import Loading from "./loader";
 
-import {
-  getStorage,
-  ref,
-  uploadBytesResumable,
-  getDownloadURL,
-} from "firebase/storage";
+// import {
+//   getStorage,
+//   ref,
+//   uploadBytesResumable,
+//   getDownloadURL,
+// } from "firebase/storage";
 import app from "../firebase";
 
 export default function SendPage() {
@@ -61,6 +63,19 @@ export default function SendPage() {
   const [docTitle, setDocTitle] = useState("");
   const params = useParams();
   const [siteID, setSiteID] = useState(false);
+  const [file, setFile] = useState(null);
+
+  const { progress, error, downloadURL, fileName } = useFirebaseUpload(file);
+
+  useEffect(() => {
+    if (error) {
+      console.log(error);
+      return alert("Try again later");
+    } else if (downloadURL) {
+      setUrl(downloadURL);
+      setDocTitle(fileName);
+    }
+  }, [error, downloadURL]);
 
   useEffect(() => {
     try {
@@ -151,43 +166,43 @@ export default function SendPage() {
     }
   };
 
-  const handleUpload = async (e) => {
-    const file = e.target.files[0];
-    const storage = getStorage(app);
-    const fileName = new Date().getTime() + file.name;
-    const storageRef = ref(storage, fileName);
-    const uploadTask = uploadBytesResumable(storageRef, file);
-    setDocTitle(fileName);
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        // setProg(progress);
-        switch (snapshot.state) {
-          case "paused":
-            console.log("Upload is paused");
-            break;
-          case "running":
-            console.log("Upload is running");
-            break;
-          default:
-            break;
-        }
-      },
-      (error) => {
-        console.log(error);
-      },
-      () => {
-        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          console.log(downloadURL);
-          setUrl(downloadURL);
-          // setCourseVideo(downloadURL);
-          // setProg(0);
-        });
-      },
-    );
-  };
+  // const handleUpload = async (e) => {
+  //   const file = e.target.files[0];
+  //   const storage = getStorage(app);
+  //   const fileName = new Date().getTime() + file.name;
+  //   const storageRef = ref(storage, fileName);
+  //   const uploadTask = uploadBytesResumable(storageRef, file);
+  //   setDocTitle(fileName);
+  //   uploadTask.on(
+  //     "state_changed",
+  //     (snapshot) => {
+  //       const progress =
+  //         (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+  //       // setProg(progress);
+  //       switch (snapshot.state) {
+  //         case "paused":
+  //           console.log("Upload is paused");
+  //           break;
+  //         case "running":
+  //           console.log("Upload is running");
+  //           break;
+  //         default:
+  //           break;
+  //       }
+  //     },
+  //     (error) => {
+  //       console.log(error);
+  //     },
+  //     () => {
+  //       getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+  //         console.log(downloadURL);
+  //         setUrl(downloadURL);
+  //         // setCourseVideo(downloadURL);
+  //         // setProg(0);
+  //       });
+  //     },
+  //   );
+  // };
 
   return (
     <div className="sendPage">
@@ -349,7 +364,10 @@ export default function SendPage() {
                           <input
                             type="file"
                             className="fileInput"
-                            onChange={handleUpload}
+                            onChange={(e) => {
+                              // handleUpload(e);
+                              setFile(e.target.files[0]);
+                            }}
                           />
                         </div>
                       </div>
@@ -385,7 +403,10 @@ export default function SendPage() {
                           <input
                             type="file"
                             className="fileInput"
-                            onChange={handleUpload}
+                            onChange={(e) => {
+                              // handleUpload(e);
+                              setFile(e.target.files[0]);
+                            }}
                           />
                           {/* <input type="file" className="fileInput" /> */}
                         </div>
@@ -464,10 +485,19 @@ export default function SendPage() {
                         handleSend();
                       }}
                     >
-                      <span className="sendIconSpan">
-                        <SendIcon id="sendIcon" />
-                      </span>
-                      <span className="spanTitle">send</span>
+                      {progress > 0 && progress < 100 ? (
+                        <>
+                          <Loading /> &nbsp; {progress}%{" "}
+                        </>
+                      ) : (
+                        <>
+                          {" "}
+                          <span className="sendIconSpan">
+                            <SendIcon id="sendIcon" />
+                          </span>
+                          <span className="spanTitle">send</span>
+                        </>
+                      )}
                     </div>
                   </div>
                 </div>

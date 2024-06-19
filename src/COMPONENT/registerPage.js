@@ -9,17 +9,21 @@ import { linkNode } from "../nodelink";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setUserDetails } from "../reactRedux/action";
+import Loading from "./loader";
 
 export default function RegisterPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("signin called");
 
+    console.log("signin called");
+    if (!email || !password) return alert("Enter a valid Email and Password");
+    setLoading(true);
     try {
       await axios
         .post(`${linkNode}/signin`, {
@@ -33,6 +37,8 @@ export default function RegisterPage() {
         });
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -76,7 +82,7 @@ export default function RegisterPage() {
           </div>
           <div className="forgot">Forgot Password ?</div>
           <div className="signInDiv" onClick={handleSubmit}>
-            Sign In
+            {loading ? <Loading /> : "Sign In"}
           </div>
           <div className="noDiv">
             <hr></hr>

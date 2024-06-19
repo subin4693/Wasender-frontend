@@ -19,6 +19,7 @@ import DangerousIcon from "@mui/icons-material/Dangerous";
 import CrisisAlertIcon from "@mui/icons-material/CrisisAlert";
 // import { Buffer } from "buffer";
 import { useParams } from "react-router-dom";
+import Loading from "./loader";
 
 export default function ManageDevicesPage() {
   const device = useSelector((state) => state.contactReducer.device);
@@ -28,19 +29,18 @@ export default function ManageDevicesPage() {
   const [qqq, setq] = useState("");
   const [insID, setInsID] = useState("");
   const [insTok, setInsTok] = useState("");
+  const [loading, setLoading] = useState(false);
   // const insID = "instance77326";
   // const insTok = "tz4c7nm9r4luh6i4";
   const dispatch = useDispatch();
   const [status, setStatus] = useState(false);
+
   const { id } = useParams();
 
   useEffect(() => {
-    console.log("device )))))))))))))))))))))))))");
-    console.log(device);
-    console.log("device )))))))))))))))))))))))))");
-
     setInsID(device.instanceID);
     setInsTok(device.token);
+    getStatus(device.token, device.instanceID);
 
     // if (device && device.length > 0) {
     //   device.forEach((dev) => {
@@ -58,10 +58,36 @@ export default function ManageDevicesPage() {
     // }
   }, []);
 
+  const getStatus = (token, instance) => {
+    var config = {
+      method: "get",
+      url: `https://api.ultramsg.com/${instance}/instance/status`,
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      params: { token },
+    };
+
+    axios(config)
+      .then(function (res) {
+        console.log(JSON.stringify(res.data));
+        console.log(res?.data?.status?.accountStatus?.status);
+        if (res?.data?.status?.accountStatus?.status === "authenticated")
+          setAuth(true);
+        // setChance(false);
+        // } else if (res?.data?.status?.accountStatus?.status === "standy") {
+        //   setAuth();
+        //        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
   useEffect(() => {
     try {
       console.log(device);
-      setAuth(device.authenthicate);
+      // setAuth(device.authenthicate);
       if (auth || device.authenthicate) {
         console.log("hrl");
         handleMessageStatus();
@@ -122,6 +148,7 @@ export default function ManageDevicesPage() {
     console.log(insID);
     console.log(insTok);
     try {
+      setLoading(true);
       let config = {
         method: "get",
         url: `https://api.ultramsg.com/${insID}/instance/qr`,
@@ -144,7 +171,7 @@ export default function ManageDevicesPage() {
           let startFun = async () => {
             i++;
             console.log(i);
-            if (i === 40) {
+            if (i === 20) {
               clearInterval(startRun);
               await handleInstanceStatus(device);
 
@@ -160,13 +187,17 @@ export default function ManageDevicesPage() {
         })
         .catch(function (error) {
           console.log(error);
+          setLoading(false);
         });
     } catch (err) {
       console.log(err);
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleInstanceStatus = async (dataObj) => {
+    console.log("handling instance status");
     try {
       await axios.post(`${linkNode}/instance`, dataObj).then(async (res) => {
         console.log("***************");
@@ -272,7 +303,7 @@ export default function ManageDevicesPage() {
                     handleVerify();
                   }}
                 >
-                  Verify
+                  {loading ? <Loading /> : "Verify"}
                 </div>
               </div>
             </div>

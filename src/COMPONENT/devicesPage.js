@@ -17,10 +17,12 @@ export default function DevicesPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((state) => state.userReducer.user);
+  const device = useSelector((state) => state.contactReducer.device);
 
   useEffect(() => {
     try {
       handleGetDevicesApi();
+      console.log(device);
     } catch (err) {
       console.log(err);
     }
