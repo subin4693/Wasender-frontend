@@ -14,11 +14,7 @@ import Select from "react-select";
 import { linkNode } from "../nodelink";
 import axios from "axios";
 import FileBase64 from "react-file-base64";
-<<<<<<< HEAD
 
-=======
-import { data } from "@tensorflow/tfjs";
->>>>>>> 4a40780c8889de48ef17dbc976686d1b35c7ba12
 import { useParams } from "react-router-dom";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";

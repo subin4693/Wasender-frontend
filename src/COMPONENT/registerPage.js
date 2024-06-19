@@ -68,7 +68,7 @@ export default function RegisterPage() {
                 <KeyIcon />
               </span>
               <input
-                type="text"
+                type="password"
                 className="passwordInput"
                 onChange={(e) => setPassword(e.target.value)}
               />

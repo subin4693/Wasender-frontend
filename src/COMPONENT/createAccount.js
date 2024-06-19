@@ -28,10 +28,6 @@ const CreateAccount = () => {
                     password,
                 })
                 .then((res) => {
-<<<<<<< HEAD
-=======
-                    console.log(res.data.data);
->>>>>>> 4a40780c8889de48ef17dbc976686d1b35c7ba12
                     dispatch(setUserDetails(res.data.data));
 
                     navigate("/filearea/dashboard");

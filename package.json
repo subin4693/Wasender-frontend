@@ -18,7 +18,7 @@
     "buffer": "^6.0.3",
     "dayjs": "^1.11.10",
     "face-api.js": "^0.20.0",
-    "firebase": "^10.7.2",
+    "firebase": "^10.12.2",
     "multiselect-react-dropdown": "^2.0.25",
     "qs": "^6.11.2",
     "react": "^18.2.0",
@@ -37,10 +37,7 @@
     "react-video-js-player": "^1.1.1",
     "react-webcam": "^7.2.0",
     "redux": "^5.0.1",
-<<<<<<< HEAD
     "redux-persist": "^6.0.0",
-=======
->>>>>>> 4a40780c8889de48ef17dbc976686d1b35c7ba12
     "socket.io": "^4.7.4",
     "styled-components": "^6.1.8",
     "uniqid": "^5.4.0",
@@ -49,7 +46,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "CI='' react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -73,10 +70,7 @@
     ]
   },
   "devDependencies": {
-<<<<<<< HEAD
     "@babel/plugin-proposal-private-property-in-object": "^7.18.6",
-=======
->>>>>>> 4a40780c8889de48ef17dbc976686d1b35c7ba12
     "sass": "^1.70.0",
     "video.js": "^8.9.0"
   }

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 // import { createStore } from "redux";
 // import { rootReducer } from ".";
 
@@ -22,11 +21,3 @@ const store = createStore(persistedReducer);
 const persistor = persistStore(store);
 
 export { store, persistor };
-=======
-import { createStore } from "redux";
-import { rootReducer } from ".";
-
-const store = createStore(rootReducer);
-
-export default store;
->>>>>>> 4a40780c8889de48ef17dbc976686d1b35c7ba12

@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { linkNode } from "../nodelink";
 import axios from "axios";
 import "../SCSS/contactsPage.scss";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 export default function AddDevicesPage() {
   const navigate = useNavigate();
@@ -25,10 +25,6 @@ export default function AddDevicesPage() {
       await axios
         .post(`${linkNode}/setdevice`, { name, number, user })
         .then((res) => {
-<<<<<<< HEAD
-=======
-          console.log(res.data.message);
->>>>>>> 4a40780c8889de48ef17dbc976686d1b35c7ba12
           navigate("../devices");
         });
     } catch (err) {
@@ -76,11 +72,7 @@ export default function AddDevicesPage() {
               />
             </div>
           </div>
-<<<<<<< HEAD
           <button
-=======
-          <div
->>>>>>> 4a40780c8889de48ef17dbc976686d1b35c7ba12
             className="submitInDiv"
             onClick={() => {
               handleSubmit();
@@ -88,11 +80,7 @@ export default function AddDevicesPage() {
             }}
           >
             submit
-<<<<<<< HEAD
           </button>
-=======
-          </div>
->>>>>>> 4a40780c8889de48ef17dbc976686d1b35c7ba12
         </div>
       </div>
     </div>
