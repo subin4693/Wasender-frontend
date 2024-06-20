@@ -514,7 +514,12 @@ export default function Schedulers() {
                                         <div
                                             className="sendDivbtn"
                                             onClick={() => {
-                                                handleSend();
+                                                if (
+                                                    progress > 0 &&
+                                                    progress < 100
+                                                )
+                                                    return;
+                                                else handleSend();
                                             }}
                                         >
                                             {progress > 0 && progress < 100 ? (

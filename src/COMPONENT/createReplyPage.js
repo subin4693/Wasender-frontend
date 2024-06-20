@@ -548,6 +548,12 @@ export default function CreateReplyPage() {
                                         <div
                                             className="sendDivbtn"
                                             onClick={() => {
+                                                if (
+                                                    progress > 0 &&
+                                                    progress < 100
+                                                )
+                                                    return;
+
                                                 if (editType) {
                                                     handleEdit();
                                                 } else {
