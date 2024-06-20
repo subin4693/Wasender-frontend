@@ -10,66 +10,40 @@ import ContactPageIcon from "@mui/icons-material/ContactPage";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { MultiSelect } from "react-multi-select-component";
 import SendIcon from "@mui/icons-material/Send";
-import Select from "react-select";
-import { linkNode } from "../nodelink";
-import axios from "axios";
-import FileBase64 from "react-file-base64";
-import Loading from "./loader";
-import { useParams } from "react-router-dom";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
+import Select from "react-select";
+import { linkNode } from "../nodelink";
+import axios from "axios";
+import FileBase64 from "react-file-base64";
+import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import dayjs from "dayjs";
 import useFirebaseUpload from "../hooks/use-firebaseUpload";
+import Loading from "./loader";
 
-export default function Schedulers() {
+export default function CreateScheduler() {
     const [show, setShow] = useState("chat");
     const [selected, setSelected] = useState([]);
     const [selectedOption, setSelectedOption] = useState(null);
-    const options = [
-        { label: "Grapes", value: "grapes" },
-        { label: "Mango", value: "mango" },
-        { label: "Strawberry", value: "strawberry" },
-        { label: "Grapes1", value: "grapes1" },
-        { label: "Mango1", value: "mango1" },
-        { label: "Strawberry1", value: "strawberry1" },
-        { label: "Grapes2", value: "grapes2" },
-        { label: "Mango2", value: "mango2" },
-        { label: "Strawberry2", value: "strawberry2" },
-        { label: "Grapes3", value: "grapes3" },
-        { label: "Mango3", value: "mango3" },
-        { label: "Grapes31", value: "grapes4" },
-        { label: "Mango4", value: "mango4" },
-        { label: "Grapes4", value: "grapes5" },
-        { label: "Mango5", value: "mango5" },
-        { label: "Grapes5", value: "grapes7" },
-        { label: "Mango6", value: "mango7" },
-    ];
     const [fromOptions, setFromOptions] = useState([]);
     const [toOptions, setToOptions] = useState([]);
-    const [devices, setDevices] = useState([]);
-    const [contacts, setContacts] = useState([]);
-    const [base, setBase] = useState("");
+
     const [bodyText, setBodyText] = useState("");
     const [latText, setLatText] = useState("");
     const [lgnText, setLgnText] = useState("");
     const [docTitle, setDocTitle] = useState("");
-    const params = useParams();
-    const [siteID, setSiteID] = useState(false);
-    const [value, setValue] = useState(null);
     const [selectedDate, setSelectedDate] = useState(null);
+    const navigate = useNavigate();
+    const params = useParams();
+    const [editType, setEditType] = useState(false);
+    const [value, setValue] = useState(null);
     const [file, setFile] = useState(null);
     const [url, setUrl] = useState("");
-    const user = useSelector((state) => state.userReducer.user);
 
-    //   function alert() {
-    //     alert("It's 3PM!");
-    //   }
-    //   var timeAt3pm = new Date("3/21/2024 03:50:00 PM").getTime()
-    //     , timeNow = new Date().getTime()
-    //     , offsetMillis = timeAt3pm - timeNow;
-    //   setTimeout(alert, offsetMillis);
+    const user = useSelector((state) => state.userReducer.user);
     const { progress, error, downloadURL, fileName } = useFirebaseUpload(file);
 
     useEffect(() => {
@@ -84,29 +58,25 @@ export default function Schedulers() {
 
     useEffect(() => {
         try {
-            console.log(params);
-            if (params?.id) {
-                setSiteID(true);
-            }
             handleGetDevicesApi();
+            if (params?.id) {
+                setEditType(true);
+                handleGetSch(params.id);
+            }
         } catch (err) {
             console.log(err);
         }
     }, []);
 
-    useEffect(() => {
-        console.log(selectedOption);
-    }, [selectedOption]);
-
     const handleGetDevicesApi = async () => {
         try {
             await axios.post(`${linkNode}/getdevice`, { user }).then((res) => {
-                setDevices(res.data.arrData);
+                // setDevices(res.data.arrData);
                 //fromOptions
                 let fromData = res.data.arrData;
                 let finalFrom = [];
 
-                for (let i = 0; i < fromData.length; i++) {
+                for (let i = 0; i < fromData?.length; i++) {
                     finalFrom.push({
                         label: fromData[i].name,
                         value: fromData[i].number,
@@ -122,7 +92,7 @@ export default function Schedulers() {
             await axios
                 .post(`${linkNode}/getcontacts`, { user })
                 .then((res) => {
-                    setContacts(res.data?.msgArr?.reverse());
+                    // setContacts(res.data?.msgArr?.reverse());
                     //ToOptions
                     let toData = res.data?.msgArr?.reverse();
                     let toFrom = [];
@@ -143,22 +113,102 @@ export default function Schedulers() {
         }
     };
 
+    const handleGetSch = async (id) => {
+        try {
+            await axios
+                .post(`${linkNode}/idsch`, { id })
+                .then((res) => {
+                    let dataObj = res.data?.msg;
+                    console.log(dataObj);
+                    if (dataObj) {
+                        setShow(dataObj.type);
+
+                        let fromCon = dataObj.from;
+                        let fromObj = [];
+                        for (let i = 0; i < fromCon.length; i++) {
+                            fromObj.push({
+                                label: fromCon[i].label,
+                                value: fromCon[i].value,
+                                name: fromCon[i].label,
+                                number: fromCon[i].value,
+                            });
+                        }
+                        setSelected(fromObj);
+                        setSelectedOption(dataObj.to);
+                        setBodyText(dataObj.body);
+                        setDocTitle(dataObj.fileName);
+                        setUrl(dataObj.file);
+
+                        let spanBaseEl = document.querySelector("#spanBase");
+
+                        if (spanBaseEl) {
+                            let inputEl = spanBaseEl.querySelector("input");
+                            let list = new DataTransfer();
+                            let file = new File(
+                                [dataObj.file],
+                                dataObj.fileName,
+                            );
+                            list.items.add(file);
+
+                            let myFileList = list.files;
+                            inputEl.files = myFileList;
+                        }
+                        //
+                        setLatText(dataObj.lat);
+                        setLgnText(dataObj.lng);
+
+                        setSelectedDate(dataObj.date);
+                    }
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
     const handleSend = async () => {
         try {
             let dataObj = {
-                from: selectedOption,
-                to: selected,
-                file: base.toString(),
+                to: selectedOption,
+                from: selected,
+                file: url,
                 fileName: docTitle,
                 body: bodyText,
                 lat: latText,
                 lng: lgnText,
                 type: show,
-                schdate: selectedDate,
+                date: selectedDate,
             };
-            await axios.post(`${linkNode}/schsendmsg`, dataObj).then((res) => {
-                alert(res.data.msgArr);
-            });
+            await axios
+                .post(`${linkNode}/createsch`, { dataObj, user })
+                .then((res) => {
+                    navigate("../schedulers");
+                });
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    const handleEdit = async () => {
+        try {
+            let dataObj = {
+                to: selectedOption,
+                from: selected,
+                file: url,
+                fileName: docTitle,
+                body: bodyText,
+                lat: latText,
+                lng: lgnText,
+                type: show,
+                date: selectedDate,
+            };
+            await axios
+                .post(`${linkNode}/editsch`, { id: params.id, dataObj })
+                .then((res) => {
+                    navigate("../schedulers");
+                });
         } catch (err) {
             console.log(err);
         }
@@ -167,7 +217,9 @@ export default function Schedulers() {
     return (
         <div className="sendPage">
             <div className="header">
-                <div className="headerTitle">Send Message</div>
+                <div className="headerTitle">
+                    {editType ? "Edit Scheduler" : "Create Scheduler"}
+                </div>
             </div>
             <div className="bodyA">
                 <div className="gridA">
@@ -253,7 +305,6 @@ export default function Schedulers() {
                                 </div>
                             </div>
                         </Grid>
-
                         <Grid item xs={10}>
                             <div className="contentDiv">
                                 <div className="head">
@@ -262,11 +313,11 @@ export default function Schedulers() {
                                 </div>
                                 <div className="headContent">
                                     <div className="toDiv">
-                                        <div className="spanA">To:</div>
+                                        <div className="spanA">From:</div>
                                         <div className="spanB">
                                             <MultiSelect
                                                 id="multiSelect"
-                                                options={toOptions}
+                                                options={fromOptions}
                                                 value={selected}
                                                 onChange={setSelected}
                                                 labelledBy="Select"
@@ -275,14 +326,15 @@ export default function Schedulers() {
                                     </div>
 
                                     <div className="toDiv">
-                                        <div className="spanA">From:</div>
+                                        <div className="spanA">To:</div>
                                         <div className="spanB">
                                             <Select
-                                                placeholder="From"
+                                                placeholder="To"
                                                 id="selectTag"
-                                                defaultValue={selectedOption}
+                                                value={selectedOption}
+                                                // defaultValue={selectedOption}
                                                 onChange={setSelectedOption}
-                                                options={fromOptions}
+                                                options={toOptions}
                                             />
                                         </div>
                                     </div>
@@ -304,7 +356,10 @@ export default function Schedulers() {
                                                     <DateTimePicker
                                                         label="Schedule Your Message"
                                                         className="timepicker"
-                                                        value={value}
+                                                        value={
+                                                            selectedDate &&
+                                                            dayjs(selectedDate)
+                                                        }
                                                         onChange={
                                                             setSelectedDate
                                                         }
@@ -316,6 +371,7 @@ export default function Schedulers() {
                                             </LocalizationProvider>
                                         </div>
                                     </div>
+
                                     {show === "chat" ? (
                                         <>
                                             <div className="toDiv">
@@ -350,18 +406,19 @@ export default function Schedulers() {
                                                         show.slice(1)}
                                                     :
                                                 </div>
-                                                <div className="spanB">
-                                                    {/*     <FileBase64
-                                                                                                       onDone={(e) => {
-                                                                                                           console.log(e);
-                                                                                                           console.log(e.name);
-                                                                                                           setDocTitle(e.name);
-                                                                                                           console.log(
-                                                                                                               e.base64,
-                                                                                                           );
-                                                                                                           setBase(e.base64);
-                                                                                                       }}
-                                                                                                   />*/}
+                                                <div
+                                                    className="spanB"
+                                                    id="spanBase"
+                                                >
+                                                    {/* <FileBase64
+                                                    //     value={docTitle}
+                                                    //     onDone={(e) => {
+                                                    //         setDocTitle(e.name);
+
+                                                    //         setBase(e.base64);
+                                                    //     }}
+                                                    //     id="baseFile"
+                                                     /> */}
                                                     <input
                                                         type="file"
                                                         className="fileInput"
@@ -373,7 +430,6 @@ export default function Schedulers() {
                                                             );
                                                         }}
                                                     />
-                                                    {/* <input type="file" className="fileInp ut" /> */}
                                                 </div>
                                             </div>
 
@@ -408,11 +464,11 @@ export default function Schedulers() {
                                                     :
                                                 </div>
                                                 <div className="spanB">
-                                                    {/*<FileBase64
-                                                                                                            onDone={(e) => {
-                                                                                                                setBase(e.base64);
-                                                                                                            }}
-                                                                                                        />*/}
+                                                    {/* <FileBase64
+                                                    //     onDone={(e) => {
+                                                    //         setBase(e.base64);
+                                                    //     }}
+                                                    />*/}
                                                     <input
                                                         type="file"
                                                         className="fileInput"
@@ -424,7 +480,6 @@ export default function Schedulers() {
                                                             );
                                                         }}
                                                     />
-                                                    {/* <input type="file" className="fileInput" /> */}
                                                 </div>
                                             </div>
                                         </>
@@ -519,7 +574,12 @@ export default function Schedulers() {
                                                     progress < 100
                                                 )
                                                     return;
-                                                else handleSend();
+
+                                                if (editType) {
+                                                    handleEdit();
+                                                } else {
+                                                    handleSend();
+                                                }
                                             }}
                                         >
                                             {progress > 0 && progress < 100 ? (
@@ -534,7 +594,9 @@ export default function Schedulers() {
                                                         <SendIcon id="sendIcon" />
                                                     </span>
                                                     <span className="spanTitle">
-                                                        send
+                                                        {editType
+                                                            ? "Edit"
+                                                            : "Create"}
                                                     </span>
                                                 </>
                                             )}

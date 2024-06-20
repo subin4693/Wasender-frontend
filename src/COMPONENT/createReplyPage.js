@@ -24,7 +24,7 @@ export default function CreateReplyPage() {
     const [selectedOption, setSelectedOption] = useState(null);
     const [fromOptions, setFromOptions] = useState([]);
     const [toOptions, setToOptions] = useState([]);
-    const [base, setBase] = useState("");
+
     const [bodyText, setBodyText] = useState("");
     const [latText, setLatText] = useState("");
     const [lgnText, setLgnText] = useState("");
@@ -127,7 +127,7 @@ export default function CreateReplyPage() {
                         setSelectedOption(dataObj.to);
                         setBodyText(dataObj.body);
                         setDocTitle(dataObj.fileName);
-                        setBase(dataObj.file);
+                        setUrl(dataObj.file);
 
                         let spanBaseEl = document.querySelector("#spanBase");
 
@@ -163,7 +163,7 @@ export default function CreateReplyPage() {
                 message: msg,
                 to: selectedOption,
                 from: selected,
-                file: base.toString(),
+                file: url,
                 fileName: docTitle,
                 body: bodyText,
                 lat: latText,
@@ -186,7 +186,7 @@ export default function CreateReplyPage() {
                 message: msg,
                 to: selectedOption,
                 from: selected,
-                file: base.toString(),
+                file: url,
                 fileName: docTitle,
                 body: bodyText,
                 lat: latText,

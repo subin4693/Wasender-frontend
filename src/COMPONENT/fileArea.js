@@ -44,11 +44,13 @@ import BulkContactPage from "./bulkContactPage";
 import AddDevicesPage from "./addDevicePage";
 import ManageDevicesPage from "./manageDevicesPage";
 import { DashBoardPage } from "./dashboardPage";
+import SchedulerPage from "./schedulePage";
+import CreateScheduler from "./createScheduler";
 // import {AdminDashboard} from "./adminDashboard";
 // import AdminContactsPage from "./adminContacts";
 import ReplyPage from "./replyPage";
 import CreateReplyPage from "./createReplyPage";
-import Schedulers from "./Scheduler";
+// import Schedulers from "./Scheduler";
 import { useSelector } from "react-redux";
 
 export default function FileArea() {
@@ -342,7 +344,16 @@ export default function FileArea() {
                             element={<BulkContactPage />}
                         />
                         <Route path="/send" element={<SendPage />} />
-                        <Route path="/schedulers" element={<Schedulers />} />
+                        <Route path="/schedulers" element={<SchedulerPage />} />
+                        <Route
+                            path="/createsch"
+                            element={<CreateScheduler />}
+                        />
+                        <Route
+                            path="/editsch/:id"
+                            element={<CreateScheduler />}
+                        />
+                        {/*<Route path="/schedulers" element={<Schedulers />} />*/}
                         <Route path="/log" element={<LogPage />} />
                         <Route path="/reply" element={<ReplyPage />} />
                         <Route
