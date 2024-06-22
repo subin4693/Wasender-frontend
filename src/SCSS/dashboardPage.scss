@@ -103,6 +103,9 @@
     max-width: 100%;
     margin-top: 30px;
     //margin: 0 auto;
+    &:hover{
+       box-shadow: 4px 4px 4px 4px #8de1876b;
+    }
   }
 }
 

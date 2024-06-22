@@ -76,19 +76,19 @@ export function DashBoardPage() {
                 <div className="number-tile" style={{ color: "#000d2452" }}>
                   10
                 </div>
-                <div>Active</div>
+                <div>Send</div>
               </div>
               <div className="tiles-db">
                 <div className="number-tile" style={{ color: "#000d2452" }}>
                   10
                 </div>
-                <div>Inactive</div>
+                <div>Unsend</div>
               </div>
               <div className="tiles-db">
                 <div className="number-tile" style={{ color: "#000d2452" }}>
                   10
                 </div>
-                <div>Expired</div>
+                <div>Pending</div>
               </div>
             </div>
           </div>
