@@ -13,7 +13,7 @@
   .addBtn {
     padding: 0px;
     font-family: "Ubuntu", sans-serif !important;
-    background-color: #46a24a;
+    background-image: linear-gradient(to right, #29fc18, #e5ee4a);
     border: none;
     color: white;
     font-size: 13px !important;
@@ -21,7 +21,7 @@
     height: 35px;
     display: flex;
     align-items: center;
-    border-radius: 5px;
+    border-radius: 20px;
   }
   .addbtntitle {
     flex: 0.8;
@@ -29,9 +29,9 @@
   }
   .plusBold {
     font-size: 29px;
-    flex: 0.2;
+    flex: 0.4;
     text-align: center;
-    background-color: #3c8a3f;
+    background-color: linear-gradient(to right, #29fc18, #e5ee4a);
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
   }

@@ -1,5 +1,8 @@
 .dashBoardPage {
-  font-family: "Ubuntu", sans-serif !important;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  font-family: "Helvetica", "Arial", "sans-serif" !important;
   .header {
     display: flex;
     align-items: center;
@@ -19,18 +22,40 @@
   }
   .activeDiv {
     border: solid 1px green;
-    background-color: #4caf50;
+    background: linear-gradient(
+      to bottom,
+      #b4ddb4 1%,
+      #83c783 17%,
+      #52b152 33%,
+      #008a00 53%,
+      #008a00 53%,
+      #005700 90%,
+      #002400 100%
+    );
+    // background-color: #4caf50;
     border-radius: 5px;
     width: 300px;
     color: white;
   }
   .activeDiv.expiry {
     border: solid 1px red;
-    background-color: #f44336;
+    background: linear-gradient(
+      to bottom,
+      #f85032 4%,
+      #f16f5c 30%,
+      #f02f17 80%,
+      #f02f17 93%
+    ); //background-color: #f44336;
   }
   .activeDiv.inactive {
     border: solid 1px gray;
-    background-color: lightgrey;
+    background: linear-gradient(
+      to bottom,
+      #d3d3d3 0%,
+      rgba(188, 171, 168, 0.655) 25%,
+      #504646 54%
+    );
+    //background-color: lightgrey;
   }
   .activeTop {
     border-bottom: solid 1px green;
@@ -70,5 +95,89 @@
   }
   #deIcon {
     font-size: 13px;
+  }
+
+  .chart-container {
+    background-color: white;
+    border-radius: 15px;
+    max-width: 100%;
+    margin-top: 30px;
+    //margin: 0 auto;
+  }
+}
+
+//new tiles
+.div__container {
+  width:80%;
+display:flex;
+margin: 0 auto;
+
+flex-direction:column;
+  .parent-flex-db {
+    display: flex;
+     
+     
+align-items:space-between;
+justify-content:space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    .flex-tile-db {
+    
+      display: flex;
+      
+      flex-direction: column;
+      gap: 30px;
+      align-items: space-between;
+      justify-content: space-between;
+      .tile-row1 {
+        display: flex;
+        align-items: center;
+        justify-content: left;
+        gap: 30px;
+        .tiles-db {
+          display: flex;
+          font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+          flex-direction: column;
+          justify-content: center;
+          align-items: left;
+          width: 130px;
+          height: 120px;
+          background-color: white;
+          border-radius: 10px;
+          padding-left: 10px;
+          .number-tile {
+            font-size: 40px;
+            font-weight: bold;
+          }
+        }
+      }
+    }
+    .flex-chart-db {
+       
+      display: flex;
+      align-items: center;
+      justify-content: left;
+      .chart-area-db {
+        h3 {
+          padding-left: 20px;
+          padding-top: 20px;
+        }
+        height: 350px;
+        width: 450px;
+        display: flex;
+        flex-direction: column;
+        align-items: left;
+        justify-content: center;
+        background-color: #ffffff;
+        border-radius: 20px;
+      }
+    }
+  }
+
+  .tiles-db:hover {
+    box-shadow: 4px 4px 4px 4px #8de1876b;
+  }
+  .chart-area-db:hover {
+    box-shadow: 4px 4px 4px 4px #8de1876b;
   }
 }

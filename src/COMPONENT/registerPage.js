@@ -47,12 +47,18 @@ export default function RegisterPage() {
       <div className="registerPage">
         <div className="regisPage">
           <div className="title">
-            <span className="titleSpanA">
+            <img
+              src="https://firebasestorage.googleapis.com/v0/b/wasender-e34f9.appspot.com/o/Logo%2Fsenddup%20logo.png?alt=media&token=4645a85d-de94-4371-9b32-f217531b482f"
+              alt="Logo"
+              width="300px"
+              height="300px"
+            />
+            {/* <span className="titleSpanA">
               <SpaIcon id="spaIcon" />
             </span>
             <span className="titleSpanA">
               WA<span className="senderSpan">sender</span>
-            </span>
+            </span> */}
           </div>
           <div className="welcome">Welcome</div>
           <div className="signInTitle">Sign into your account</div>

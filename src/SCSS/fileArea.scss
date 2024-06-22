@@ -1,15 +1,16 @@
 #fileAreaPage {
   #leftComponent {
     .MuiPaper-root.MuiPaper-elevation.MuiPaper-elevation0.MuiDrawer-paper {
-      background-color: #263238;
-      color: white;
+      background-color: white;
+      color: #263238;
     }
     ul {
       li {
         span {
-          font-family: "Ubuntu", sans-serif !important;
+          font-family: "Helvetica", "Arial", "sans-serif" !important;
           font-size: 13px !important;
         }
+        border-radius: 20px;
       }
       padding-top: 0px !important;
     }
@@ -17,11 +18,21 @@
     #devicesIcon,
     #peopleIcon,
     #sendIcon {
-      color: white !important;
+      color: #263238 !important;
       font-size: 18px !important;
     }
     li:hover {
-      background-color: #26a69a;
+      background-image: linear-gradient(to right, #29fc18, #e5ee4a);
+      color: white;
+      box-shadow: #1b232780;
+      #dashBoardIcon,
+      #devicesIcon,
+      #peopleIcon,
+      #sendIcon {
+        color: white !important;
+        font-size: 18px !important;
+        box-shadow: 2px 2px 4px #000000;
+      }
     }
   }
   #basic-menu {

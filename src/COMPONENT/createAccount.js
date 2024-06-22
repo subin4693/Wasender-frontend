@@ -55,12 +55,18 @@ const CreateAccount = () => {
         >
             <div className="regisPage">
                 <div className="title">
-                    <span className="titleSpanA">
+                    {/*  <span className="titleSpanA">
                         <SpaIcon id="spaIcon" />
                     </span>
                     <span className="titleSpanA">
                         WA<span className="senderSpan">sender</span>
-                    </span>
+                    </span>*/}
+                    <img
+                        src="https://firebasestorage.googleapis.com/v0/b/wasender-e34f9.appspot.com/o/Logo%2Fsenddup%20logo.png?alt=media&token=4645a85d-de94-4371-9b32-f217531b482f"
+                        alt="Logo"
+                        width="300px"
+                        height="300px"
+                    />
                 </div>
                 <h2>Create Account</h2>
                 <form className="create-account-form" onSubmit={handleSubmit}>

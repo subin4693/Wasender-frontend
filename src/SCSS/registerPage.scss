@@ -4,7 +4,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #09b59c;
+  background-image: linear-gradient(to right, #29fc18, #e5ee4a);
   font-family: "Ubuntu", sans-serif;
   .regisPage {
     border-radius: 10px;
@@ -110,8 +110,9 @@
   .signInDiv {
     margin-top: 5%;
     font-size: 13px;
-    border-radius: 5px;
-    background-color: #1f8be1;
+    border-radius: 20px;
+    //background-color: #1f8be1;
+    background-image: linear-gradient(to right, #29fc18, #e5ee4a);
     color: white;
     text-align: center;
     padding: 11px 14px;
@@ -139,8 +140,9 @@
   .signUpDiv {
     margin-top: 3%;
     font-size: 13px;
-    border-radius: 5px;
-    background-color: #f5f5f5;
+    border-radius: 20px;
+    // background-color: #f5f5f5;
+    background: linear-gradient(to right, #29fc18, #e5ee4a);
     color: black;
     text-align: center;
     padding: 11px 14px;

@@ -86,8 +86,10 @@
   }
   .submitInDiv {
     font-size: 13px;
-    border-radius: 5px;
-    background-color: #1f8be1;
+    border-radius: 20px;
+    //background-color: #1f8be1;
+    cursor: pointer;
+    background: linear-gradient(to right, #29fc18, #e5ee4a);
     color: white;
     text-align: center;
     padding: 8px 14px;

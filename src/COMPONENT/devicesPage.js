@@ -114,7 +114,7 @@ export default function DevicesPage() {
                           <span className="rocketIcon">
                             <RocketIcon id="rocketIcon" />
                           </span>
-                          <span className="rocketTitle">Manage</span>
+                          <span className="rocketTitle  ">Manage</span>
                         </button>
                         <button className="rocketBtn paybtn">
                           <span className="rocketIcon">

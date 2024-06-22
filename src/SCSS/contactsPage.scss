@@ -19,7 +19,8 @@
     margin-left: 1%;
     padding: 0px;
     font-family: "Ubuntu", sans-serif !important;
-    background-color: #46a24a;
+    //background-color: #46a24a;
+    background: linear-gradient(to right, #29fc18, #e5ee4a);
     border: none;
     color: white;
     font-size: 13px !important;
@@ -27,7 +28,7 @@
     height: 35px;
     display: flex;
     align-items: center;
-    border-radius: 5px;
+    border-radius: 20px;
   }
   .addBtn.bulk {
     background-color: #40a8bc;
@@ -40,13 +41,11 @@
     font-size: 29px;
     flex: 0.2;
     text-align: center;
-    background-color: #3c8a3f;
+    background-color: none;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
   }
-  .plusBold.bulk {
-    background-color: #397783;
-  }
+
   .bodyA {
     margin-top: 5%;
   }
@@ -213,8 +212,9 @@
   }
   .submitInDiv {
     font-size: 13px;
-    border-radius: 5px;
-    background-color: #1f8be1;
+    border-radius: 20px;
+    //background-color: #1f8be1;
+    background: linear-gradient(to right, #29fc18, #e5ee4a);
     color: white;
     text-align: center;
     padding: 8px 14px;
