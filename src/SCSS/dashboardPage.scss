@@ -111,9 +111,9 @@
 
 //new tiles
 .div__container {
-  width:80%;
+  max-width:1000px;
 display:flex;
-margin: 0 auto;
+margin-left: 10%;
 
 flex-direction:column;
   .parent-flex-db {
@@ -131,7 +131,7 @@ justify-content:space-between;
       flex-direction: column;
       gap: 30px;
       align-items: space-between;
-      justify-content: space-between;
+      justify-content: center;
       .tile-row1 {
         display: flex;
         align-items: center;
@@ -143,8 +143,8 @@ justify-content:space-between;
           flex-direction: column;
           justify-content: center;
           align-items: left;
-          width: 130px;
-          height: 120px;
+          width: 140px;
+          height: 130px;
           background-color: white;
           border-radius: 10px;
           padding-left: 10px;

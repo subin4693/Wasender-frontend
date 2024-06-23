@@ -74,21 +74,21 @@ export function DashBoardPage() {
             <div className="tile-row1">
               <div className="tiles-db">
                 <div className="number-tile" style={{ color: "#000d2452" }}>
-                  10
+                  83
                 </div>
                 <div>Send</div>
               </div>
               <div className="tiles-db">
                 <div className="number-tile" style={{ color: "#000d2452" }}>
-                  10
+                  6
                 </div>
                 <div>Unsend</div>
               </div>
               <div className="tiles-db">
                 <div className="number-tile" style={{ color: "#000d2452" }}>
-                  10
+                  11
                 </div>
-                <div>Pending</div>
+                <div>Bot</div>
               </div>
             </div>
           </div>
@@ -113,7 +113,7 @@ export function DashBoardPage() {
                   {
                     data: [
                       { value: 30, color: "#29fc18", label: "Sent" },
-                      { value: 15, color: "#e5ee4a", label: "Pending" },
+                      { value: 15, color: "#e5ee4a", label: "Bot" },
                       { value: 10, color: "#ede19f", label: "Un-Sent" },
                     ],
                     innerRadius: 30,
