@@ -157,7 +157,7 @@ export default function FileArea() {
                                     ""
                                 )}
                             </ListItemIcon>
-                            <ListItemText primary={text} />
+                            <ListItemText primary={text.toLowerCase()} />
                         </ListItemButton>
                     </ListItem>
                 ))}

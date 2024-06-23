@@ -41,9 +41,7 @@
   .bodyAtitle {
     padding: 15px 20px;
     font-size: 20px;
-    background-color: white;
-    border: solid 1px gray;
-    border-bottom: none;
+
     display: flex;
     align-items: center;
   }
@@ -61,7 +59,6 @@
   thead,
   tbody,
   tr {
-    border: solid 1px gray;
     border-collapse: collapse;
   }
   td,
@@ -106,7 +103,7 @@
   }
   .rocketBtn {
     border: none;
-    background-color: #40a8bc;
+    background-color: #29fc18;
     color: white;
     display: flex;
     align-items: center;
@@ -138,7 +135,7 @@
     background-color: #4caf50;
   }
   .paybtn {
-    background-color: #4caf50;
+    background-color: #e5ee4a;
   }
   .tdE {
     margin-right: 4%;

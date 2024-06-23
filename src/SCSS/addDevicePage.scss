@@ -55,17 +55,17 @@
   }
   .submitInDiv {
     font-size: 13px;
-    border-radius: 5px;
+    border-radius: 20px;
     //background-color: #1f8be1;
     background: linear-gradient(to right, #29fc18, #e5ee4a);
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
+
     color: white;
     text-align: center;
     padding: 8px 14px;
     display: flex;
     justify-content: center;
     align-items: center;
+    border: none;
   }
   #countrySelect {
     overflow-y: scroll;
