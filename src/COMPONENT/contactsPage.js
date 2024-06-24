@@ -3,6 +3,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import { DeleteRounded } from "@mui/icons-material";
 import "../SCSS/addDevicePage.scss";
+import Skleton from "./skleton.jsx";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,6 +18,7 @@ export default function ContactsPage() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [status, setStatus] = useState(false);
+    const [loading, setLoading] = useState(false);
     const user = useSelector((state) => state.userReducer.user);
 
     useEffect(() => {
@@ -39,6 +41,7 @@ export default function ContactsPage() {
 
     const handleGetContacts = async () => {
         try {
+            setLoading(true);
             await axios
                 .post(`${linkNode}/getcontacts`, { user })
                 .then((res) => {
@@ -46,6 +49,8 @@ export default function ContactsPage() {
                 });
         } catch (err) {
             console.log(err);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -142,56 +147,85 @@ export default function ContactsPage() {
                                 <td className="thC"></td>
                             </tr>
                         </thead>
-                        <tbody>
-                            {devices.map((data) => {
-                                return (
-                                    <tr>
-                                        <td>
-                                            <div className="accSpan">
-                                                <AccountCircleIcon id="accIcon" />
-                                            </div>
-                                        </td>
-                                        <td>{data.number}</td>
-                                        <td>{data.name}</td>
-                                        <td>{data.created}</td>
-                                        <td className="tdE">
-                                            <button
-                                                onClick={() => {
-                                                    handleEditContact(data);
-                                                }}
-                                                className="rocketBtn"
-                                                style={{
-                                                    backgroundColor: "black",
-                                                }}
-                                            >
-                                                <span className="rocketIcon">
-                                                    <ModeEditIcon id="rocketIcon" />
-                                                </span>
-                                                <span className="rocketTitle">
-                                                    Edit
-                                                </span>
-                                            </button>
-                                            <button
-                                                className="rocketBtn"
-                                                style={{
-                                                    backgroundColor: "#f15438",
-                                                }}
-                                                onClick={() => {
-                                                    handleDeleteContacts(data);
-                                                }}
-                                            >
-                                                <span className="rocketIcon">
-                                                    <DeleteRounded id="rocketIcon" />
-                                                </span>
-                                                <span className="rocketTitle">
-                                                    Delete
-                                                </span>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                );
-                            })}
-                        </tbody>
+                        {!loading ? (
+                            <tbody>
+                                {devices.map((data) => {
+                                    return (
+                                        <tr>
+                                            <td>
+                                                <div className="accSpan">
+                                                    <AccountCircleIcon id="accIcon" />
+                                                </div>
+                                            </td>
+                                            <td>{data.number}</td>
+                                            <td>{data.name}</td>
+                                            <td>{data.created}</td>
+                                            <td className="tdE">
+                                                <button
+                                                    onClick={() => {
+                                                        handleEditContact(data);
+                                                    }}
+                                                    className="rocketBtn"
+                                                    style={{
+                                                        backgroundColor:
+                                                            "black",
+                                                    }}
+                                                >
+                                                    <span className="rocketIcon">
+                                                        <ModeEditIcon id="rocketIcon" />
+                                                    </span>
+                                                    <span className="rocketTitle">
+                                                        Edit
+                                                    </span>
+                                                </button>
+                                                <button
+                                                    className="rocketBtn"
+                                                    style={{
+                                                        backgroundColor:
+                                                            "#f15438",
+                                                    }}
+                                                    onClick={() => {
+                                                        handleDeleteContacts(
+                                                            data,
+                                                        );
+                                                    }}
+                                                >
+                                                    <span className="rocketIcon">
+                                                        <DeleteRounded id="rocketIcon" />
+                                                    </span>
+                                                    <span className="rocketTitle">
+                                                        Delete
+                                                    </span>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    );
+                                })}
+                            </tbody>
+                        ) : (
+                            <tr>
+                                <td>
+                                    {" "}
+                                    <Skleton />
+                                </td>
+                                <td>
+                                    {" "}
+                                    <Skleton />
+                                </td>
+                                <td>
+                                    {" "}
+                                    <Skleton />
+                                </td>
+                                <td>
+                                    {" "}
+                                    <Skleton />
+                                </td>
+                                <td>
+                                    {" "}
+                                    <Skleton />
+                                </td>
+                            </tr>
+                        )}
                     </table>
                 </div>
             </div>

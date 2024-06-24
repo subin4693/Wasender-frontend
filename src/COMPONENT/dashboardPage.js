@@ -108,6 +108,7 @@ export function DashBoardPage() {
                   },
                 ]}
               /> */}
+
               <PieChart
                 series={[
                   {
@@ -212,6 +213,8 @@ export function DashBoardPage() {
             series={[
               {
                 data: [2, 5.5, 2, 8.5, 1.5, 5],
+                area: true,
+                color: "#29fc18",
               },
             ]}
             height={400}

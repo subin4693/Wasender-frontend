@@ -16,6 +16,7 @@ export const contactReducer = (state = initialState, action) => {
           ...initialState,
           device: action.payload,
         };
+
       default:
         return state;
     }

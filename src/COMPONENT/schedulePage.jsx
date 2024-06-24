@@ -5,7 +5,7 @@ import { DeleteRounded } from "@mui/icons-material";
 import "../SCSS/replypage.scss";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import { useNavigate } from "react-router-dom";
-
+import Skleton from "./skleton.jsx";
 import { funSetContact } from "../reactRedux/action";
 import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
@@ -17,6 +17,7 @@ export default function SchedulerPage() {
     // const [devices, setDevices] = useState([]);
     const [messages, setMessages] = useState([]);
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
     // const dispatch = useDispatch();
     const [status, setStatus] = useState(false);
     const user = useSelector((state) => state.userReducer.user);
@@ -41,12 +42,15 @@ export default function SchedulerPage() {
 
     const handleGetSch = async () => {
         try {
+            setLoading(true);
             await axios.post(`${linkNode}/getsch`, { user }).then((res) => {
                 console.log(res.data.msg);
                 setMessages(res.data?.msg?.reverse());
             });
         } catch (err) {
             console.log(err);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -137,60 +141,88 @@ export default function SchedulerPage() {
                                 <td className="thE">Message Type</td>
                                 <td className="thF">Action</td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            {messages.length &&
-                                messages.map((data) => {
-                                    return (
-                                        <tr>
-                                            <td>{HandleFrom(data)}</td>
-                                            <td>{data.to.label}</td>
-                                            <td>{data?.date}</td>
-                                            <td>{data.type}</td>
-                                            {<td>{data.body}</td>}
-                                            <td className="tdE">
-                                                <button
-                                                    onClick={() => {
-                                                        // handleEditContact(data);
-                                                        navigate(
-                                                            `../editsch/${data._id}`,
-                                                        );
-                                                        console.log(data);
-                                                    }}
-                                                    className="rocketBtn"
-                                                    style={{
-                                                        backgroundColor: "blue",
-                                                    }}
-                                                >
-                                                    <span className="rocketIcon">
-                                                        <ModeEditIcon id="rocketIcon" />
-                                                    </span>
-                                                    <span className="rocketTitle">
-                                                        Edit
-                                                    </span>
-                                                </button>
-                                                <button
-                                                    className="rocketBtn"
-                                                    style={{
-                                                        backgroundColor:
-                                                            "#f15438",
-                                                    }}
-                                                    onClick={() => {
-                                                        handleDeleteSch(data);
-                                                    }}
-                                                >
-                                                    <span className="rocketIcon">
-                                                        <DeleteRounded id="rocketIcon" />
-                                                    </span>
-                                                    <span className="rocketTitle">
-                                                        Delete
-                                                    </span>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    );
-                                })}
-                        </tbody>
+                        </thead>{" "}
+                        {!loading ? (
+                            <tbody>
+                                {messages.length &&
+                                    messages.map((data) => {
+                                        return (
+                                            <tr>
+                                                <td>{HandleFrom(data)}</td>
+                                                <td>{data.to.label}</td>
+                                                <td>{data?.date}</td>
+                                                <td>{data.type}</td>
+                                                {<td>{data.body}</td>}
+                                                <td className="tdE">
+                                                    <button
+                                                        onClick={() => {
+                                                            // handleEditContact(data);
+                                                            navigate(
+                                                                `../editsch/${data._id}`,
+                                                            );
+                                                            console.log(data);
+                                                        }}
+                                                        className="rocketBtn"
+                                                        style={{
+                                                            backgroundColor:
+                                                                "blue",
+                                                        }}
+                                                    >
+                                                        <span className="rocketIcon">
+                                                            <ModeEditIcon id="rocketIcon" />
+                                                        </span>
+                                                        <span className="rocketTitle">
+                                                            Edit
+                                                        </span>
+                                                    </button>
+                                                    <button
+                                                        className="rocketBtn"
+                                                        style={{
+                                                            backgroundColor:
+                                                                "#f15438",
+                                                        }}
+                                                        onClick={() => {
+                                                            handleDeleteSch(
+                                                                data,
+                                                            );
+                                                        }}
+                                                    >
+                                                        <span className="rocketIcon">
+                                                            <DeleteRounded id="rocketIcon" />
+                                                        </span>
+                                                        <span className="rocketTitle">
+                                                            Delete
+                                                        </span>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        );
+                                    })}
+                            </tbody>
+                        ) : (
+                            <tr>
+                                <td>
+                                    {" "}
+                                    <Skleton />
+                                </td>
+                                <td>
+                                    {" "}
+                                    <Skleton />
+                                </td>
+                                <td>
+                                    {" "}
+                                    <Skleton />
+                                </td>
+                                <td>
+                                    {" "}
+                                    <Skleton />
+                                </td>
+                                <td>
+                                    {" "}
+                                    <Skleton />
+                                </td>
+                            </tr>
+                        )}
                     </table>
                 </div>
             </div>

@@ -52,9 +52,9 @@
   .bodyAtitle {
     padding: 15px 20px;
     font-size: 20px;
-    background-color: white;
-    border: solid 1px gray;
-    border-bottom: none;
+    // background-color: white;
+    //border: solid 1px gray;
+    // border-bottom: none;
     display: flex;
     align-items: center;
   }
@@ -69,6 +69,7 @@
   table {
     min-width: 100%;
     overflow: scroll;
+    border: none;
   }
   .thA {
     display: flex;
@@ -79,7 +80,6 @@
   thead,
   tbody,
   tr {
-    border: solid 1px gray;
     border-collapse: collapse;
   }
   td,
@@ -213,6 +213,7 @@
   .submitInDiv {
     font-size: 13px;
     border-radius: 20px;
+    border: none;
     //background-color: #1f8be1;
     background: linear-gradient(to right, #29fc18, #e5ee4a);
     color: white;
