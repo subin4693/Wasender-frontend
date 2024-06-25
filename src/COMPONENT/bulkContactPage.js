@@ -8,9 +8,11 @@ import { countryCode } from "../countryCode";
 import axios from "axios";
 import { linkNode } from "../nodelink";
 import * as XLSX from "xlsx";
+import Loading from "./loader";
 
 export default function BulkContactPage() {
     const [data, setData] = useState();
+    const [loading, setLOading] = useState(false);
     const navigate = useNavigate();
     const fileInputRef = useRef();
     const user = useSelector((state) => state.userReducer.user);
@@ -21,9 +23,21 @@ export default function BulkContactPage() {
             console.log(err);
         }
     }, []);
-
-    const handleImportNumber = async (e) => {
+    let handleImportNumber = async () => {
         try {
+            await axios.post(`${linkNode}/bulknumber`).then((res) => {
+                console.log(res.data);
+                navigate("../contacts");
+            });
+            //
+        } catch (err) {
+            console.log();
+        }
+    };
+
+    const handleImportNumberFromExcel = async (e) => {
+        try {
+            setLoading(true);
             const file = e.target.files[0];
             const reader = new FileReader();
 
@@ -55,6 +69,8 @@ export default function BulkContactPage() {
             navigate("../contacts");
         } catch (err) {
             console.error(err);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -65,6 +81,7 @@ export default function BulkContactPage() {
             </div>
             <div className="bodyA">
                 <div className="bodyAhead">Import contacts from Device</div>
+                <br />
                 <div className="inputsDivs">
                     <div className="conDiv">
                         <div className="conInputDiv">
@@ -84,29 +101,43 @@ export default function BulkContactPage() {
                         </div>
                     </div>
 
-                    {/*   <button
-                            className="submitInDiv"
-                            onClick={() => {
-                                handleImportNumber();
-                            }}
-                        >
-                            Import Contacts
-                        </button>*/}
+                    <button
+                        className="submitInDiv"
+                        onClick={() => {
+                            handleImportNumber();
+                        }}
+                    >
+                        Import Contacts
+                    </button>
+                </div>
+                <br />
+                <div className="inputsDivs">
+                    <div className="conInputDiv">
+                        <span className="conSpan">
+                            <PersonIcon />
+                        </span>
+                        &nbsp; Click here to import contacts from.xlsx &nbsp;
+                    </div>{" "}
+                    &nbsp;
                     <input
                         type="file"
                         accept=".xlsx, .xls"
                         style={{ display: "none" }}
                         ref={fileInputRef}
-                        onChange={handleImportNumber}
+                        onChange={handleImportNumberFromExcel}
                     />
-
                     <button
                         className="submitInDiv"
                         onClick={() => {
+                            if (loading) return;
                             fileInputRef.current.click();
                         }}
                     >
-                        Import Contacts
+                        {loading ? (
+                            <Loading />
+                        ) : (
+                            "Import Contacts (Excel format)"
+                        )}
                     </button>
                 </div>
             </div>

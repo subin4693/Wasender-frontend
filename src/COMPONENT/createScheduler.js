@@ -171,8 +171,8 @@ export default function CreateScheduler() {
     const handleSend = async () => {
         try {
             let dataObj = {
-                to: selectedOption,
-                from: selected,
+                to: selected,
+                from: selectedOption,
                 file: url,
                 fileName: docTitle,
                 body: bodyText,
@@ -180,6 +180,8 @@ export default function CreateScheduler() {
                 lng: lgnText,
                 type: show,
                 date: selectedDate,
+                instanceID: selectedOption.instanceID,
+                token: selectedOption.token,
             };
             console.log(dataObj);
             await axios
@@ -195,8 +197,8 @@ export default function CreateScheduler() {
     const handleEdit = async () => {
         try {
             let dataObj = {
-                to: selectedOption,
-                from: selected,
+                to: selected,
+                from: selectedOption,
                 file: url,
                 fileName: docTitle,
                 body: bodyText,

@@ -67,7 +67,7 @@ export default function SchedulerPage() {
 
     const HandleFrom = (data) => {
         try {
-            let contacts = data?.from;
+            let contacts = data?.to;
             let fromNames = [];
 
             for (let i = 0; i < contacts.length; i++) {
@@ -148,8 +148,8 @@ export default function SchedulerPage() {
                                     messages.map((data) => {
                                         return (
                                             <tr>
+                                                <td>{data?.from?.label}</td>
                                                 <td>{HandleFrom(data)}</td>
-                                                <td>{data.to.label}</td>
                                                 <td>{data?.date}</td>
                                                 <td>{data.type}</td>
                                                 {<td>{data.body}</td>}
