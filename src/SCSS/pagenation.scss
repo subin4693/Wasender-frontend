@@ -1,0 +1,19 @@
+.pagination_container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 10px;
+	gap: 10px;
+	button {
+		padding: 3px 5px;
+		background-color: #29fc18;
+		border: none;
+		outline: none;
+		border-radius: 5px;
+		font-size: 16px;
+		color: white;
+	}
+	button.active {
+		background-color: #e5ee4a;
+	}
+}

@@ -9,6 +9,7 @@ import { linkNode } from "../nodelink";
 import axios from "axios";
 import "../SCSS/devicesPage.scss";
 import Skleton from "./skleton.jsx";
+import Pagenation from "./pagenation";
 
 import { funSetDevice } from "../reactRedux/action";
 import { useSelector, useDispatch } from "react-redux";
@@ -16,6 +17,8 @@ import { useSelector, useDispatch } from "react-redux";
 export default function DevicesPage() {
   const [devices, setDevices] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((state) => state.userReducer.user);
@@ -23,20 +26,23 @@ export default function DevicesPage() {
 
   useEffect(() => {
     try {
-      handleGetDevicesApi();
+      handleGetDevicesApi(page);
       console.log(device);
     } catch (err) {
       console.log(err);
     }
-  }, []);
+  }, [page]);
 
-  const handleGetDevicesApi = async () => {
+  const handleGetDevicesApi = async (pagee) => {
     try {
       setLoading(true);
-      await axios.post(`${linkNode}/getdevice`, { user }).then((res) => {
-        console.log(res.data.arrData);
-        setDevices(res.data.arrData);
-      });
+      await axios
+        .post(`${linkNode}/getdevice?page=${pagee}`, { user })
+        .then((res) => {
+          console.log(res.data.arrData);
+          setDevices(res.data.arrData);
+          setTotalPages(res.data.pagination.totalPage);
+        });
     } catch (err) {
       console.log(err);
     } finally {
@@ -160,6 +166,7 @@ export default function DevicesPage() {
           </table>
         </div>
       </div>
+      <Pagenation totalPages={totalPages} setPage={setPage} page={page} />
     </div>
   );
 }
