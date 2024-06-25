@@ -12,7 +12,7 @@ import Loading from "./loader";
 
 export default function BulkContactPage() {
     const [data, setData] = useState();
-    const [loading, setLOading] = useState(false);
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const fileInputRef = useRef();
     const user = useSelector((state) => state.userReducer.user);
