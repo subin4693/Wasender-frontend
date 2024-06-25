@@ -52,9 +52,9 @@
   .bodyAtitle {
     padding: 15px 20px;
     font-size: 20px;
-    // background-color: white;
-    //border: solid 1px gray;
-    // border-bottom: none;
+    background-color: white;
+    border: solid 1px gray;
+    border-bottom: none;
     display: flex;
     align-items: center;
   }
@@ -69,7 +69,7 @@
   table {
     min-width: 100%;
     overflow: scroll;
-    border: none;
+    border: solid 1px gray;
   }
   .thA {
     display: flex;
@@ -81,6 +81,7 @@
   tbody,
   tr {
     border-collapse: collapse;
+    border: solid 1px gray;
   }
   td,
   th {

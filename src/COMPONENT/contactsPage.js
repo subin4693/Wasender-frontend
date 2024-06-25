@@ -220,10 +220,6 @@ export default function ContactsPage() {
                                     {" "}
                                     <Skleton />
                                 </td>
-                                <td>
-                                    {" "}
-                                    <Skleton />
-                                </td>
                             </tr>
                         )}
                     </table>

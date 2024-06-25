@@ -181,6 +181,7 @@ export default function CreateScheduler() {
                 type: show,
                 date: selectedDate,
             };
+            console.log(dataObj);
             await axios
                 .post(`${linkNode}/createsch`, { dataObj, user })
                 .then((res) => {
@@ -315,12 +316,13 @@ export default function CreateScheduler() {
                                     <div className="toDiv">
                                         <div className="spanA">From:</div>
                                         <div className="spanB">
-                                            <MultiSelect
-                                                id="multiSelect"
+                                            <Select
+                                                placeholder="From"
+                                                id="selectTag"
+                                                value={selectedOption}
+                                                // defaultValue={selectedOption}
+                                                onChange={setSelectedOption}
                                                 options={fromOptions}
-                                                value={selected}
-                                                onChange={setSelected}
-                                                labelledBy="Select"
                                             />
                                         </div>
                                     </div>
@@ -328,13 +330,12 @@ export default function CreateScheduler() {
                                     <div className="toDiv">
                                         <div className="spanA">To:</div>
                                         <div className="spanB">
-                                            <Select
-                                                placeholder="To"
-                                                id="selectTag"
-                                                value={selectedOption}
-                                                // defaultValue={selectedOption}
-                                                onChange={setSelectedOption}
+                                            <MultiSelect
+                                                id="multiSelect"
                                                 options={toOptions}
+                                                value={selected}
+                                                onChange={setSelected}
+                                                labelledBy="Select"
                                             />
                                         </div>
                                     </div>
