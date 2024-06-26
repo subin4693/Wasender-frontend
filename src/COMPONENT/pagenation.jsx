@@ -2,6 +2,7 @@ import React from "react";
 import "../SCSS/pagenation.scss";
 
 const pagenation = ({ totalPages, page, setPage }) => {
+	console.log({ totalPages, page });
 	if (totalPages <= 1) return <></>;
 	let arr = [];
 	for (let i = 1; i <= totalPages; i++) arr.push(i);

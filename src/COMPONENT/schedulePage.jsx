@@ -11,6 +11,7 @@ import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
 import { linkNode } from "../nodelink";
 import axios from "axios";
+import Pagenation from "./pagenation";
 import { useSelector } from "react-redux";
 
 export default function SchedulerPage() {
@@ -20,16 +21,18 @@ export default function SchedulerPage() {
     const [loading, setLoading] = useState(false);
     // const dispatch = useDispatch();
     const [status, setStatus] = useState(false);
+    const [page, setPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
     const user = useSelector((state) => state.userReducer.user);
 
     useEffect(() => {
         try {
-            handleGetSch();
+            handleGetSch(page);
             setStatus(false);
         } catch (err) {
             console.log(err);
         }
-    }, [status]);
+    }, [status, page]);
 
     // const handleEditContact = (data) => {
     //   try {
@@ -40,13 +43,16 @@ export default function SchedulerPage() {
     //   }
     // };
 
-    const handleGetSch = async () => {
+    const handleGetSch = async (pagee) => {
         try {
             setLoading(true);
-            await axios.post(`${linkNode}/getsch`, { user }).then((res) => {
-                console.log(res.data.msg);
-                setMessages(res.data?.msg?.reverse());
-            });
+            await axios
+                .post(`${linkNode}/getsch?page=${pagee}`, { user })
+                .then((res) => {
+                    console.log(res.data.msg);
+                    setMessages(res.data?.msg?.reverse());
+                    setTotalPages(res.data?.pagination?.totalPage);
+                });
         } catch (err) {
             console.log(err);
         } finally {
@@ -226,6 +232,7 @@ export default function SchedulerPage() {
                     </table>
                 </div>
             </div>
+            <Pagenation totalPages={totalPages} setPage={setPage} page={page} />
         </div>
     );
 }

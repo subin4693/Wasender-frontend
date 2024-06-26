@@ -112,13 +112,7 @@ export default function BulkContactPage() {
                 </div>
                 <br />
                 <div className="inputsDivs">
-                    <div className="conInputDiv">
-                        <span className="conSpan">
-                            <PersonIcon />
-                        </span>
-                        &nbsp; Click here to import contacts from.xlsx &nbsp;
-                    </div>{" "}
-                    &nbsp;
+                    &nbsp; Click here to import contacts from.xlsx &nbsp;
                     <input
                         type="file"
                         accept=".xlsx, .xls"

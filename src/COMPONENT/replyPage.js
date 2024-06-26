@@ -12,11 +12,14 @@ import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
 import { linkNode } from "../nodelink";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import Pagenation from "./pagenation";
 
 export default function ReplyPage() {
     // const [devices, setDevices] = useState([]);
     const [messages, setMessages] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [page, setPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
     const navigate = useNavigate();
     // const dispatch = useDispatch();
     const [status, setStatus] = useState(false);
@@ -24,12 +27,12 @@ export default function ReplyPage() {
 
     useEffect(() => {
         try {
-            handleGetReply();
+            handleGetReply(page);
             setStatus(false);
         } catch (err) {
             console.log(err);
         }
-    }, [status]);
+    }, [status, page]);
 
     // const handleEditContact = (data) => {
     //   try {
@@ -40,13 +43,16 @@ export default function ReplyPage() {
     //   }
     // };
 
-    const handleGetReply = async () => {
+    const handleGetReply = async (pagee) => {
         try {
             setLoading(true);
-            await axios.post(`${linkNode}/getreply`, { user }).then((res) => {
-                console.log(res.data.msg);
-                setMessages(res.data?.msg?.reverse());
-            });
+            await axios
+                .post(`${linkNode}/getreply?page=${pagee}`, { user })
+                .then((res) => {
+                    console.log(res.data.msg);
+                    setMessages(res.data?.msg?.reverse());
+                    setTotalPages(res.data?.pagination?.totalPage);
+                });
         } catch (err) {
             console.log(err);
         } finally {
@@ -226,6 +232,7 @@ export default function ReplyPage() {
                     </table>
                 </div>
             </div>
+            <Pagenation totalPages={totalPages} setPage={setPage} page={page} />
         </div>
     );
 }

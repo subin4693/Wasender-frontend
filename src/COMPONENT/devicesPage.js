@@ -37,11 +37,11 @@ export default function DevicesPage() {
     try {
       setLoading(true);
       await axios
-        .post(`${linkNode}/getdevice?page=${pagee}`, { user })
+        .post(`${linkNode}/getdevice?page=${pagee}&pagenate=true`, { user })
         .then((res) => {
           console.log(res.data.arrData);
           setDevices(res.data.arrData);
-          setTotalPages(res.data.pagination.totalPage);
+          setTotalPages(res.data?.pagination?.totalPage);
         });
     } catch (err) {
       console.log(err);

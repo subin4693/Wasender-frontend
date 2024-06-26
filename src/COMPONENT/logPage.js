@@ -98,6 +98,7 @@ export default function LogPage() {
   };
 
   const handleLogChats = async () => {
+    console.log("handle log chats");
     try {
       console.log("****************");
       console.log(fromSelect, toSelect);
@@ -218,7 +219,9 @@ export default function LogPage() {
                   <Select
                     placeholder="From"
                     id="selectTag"
-                    onChange={setFromSelect}
+                    onChange={(e) => {
+                      setFromSelect(e);
+                    }}
                     options={fromOptions}
                   />
                 </div>
@@ -229,7 +232,7 @@ export default function LogPage() {
                   <Select
                     placeholder="To"
                     id="selectTag"
-                    onChange={setToSelect}
+                    onChange={(e) => setToSelect(e)}
                     options={toOptions}
                   />
                 </div>
