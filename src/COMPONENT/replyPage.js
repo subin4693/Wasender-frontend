@@ -32,7 +32,14 @@ export default function ReplyPage() {
         } catch (err) {
             console.log(err);
         }
-    }, [status, page]);
+    }, [status]);
+    useEffect(() => {
+        try {
+            handleGetReply(page);
+        } catch (err) {
+            console.log(err);
+        }
+    }, [page]);
 
     // const handleEditContact = (data) => {
     //   try {
