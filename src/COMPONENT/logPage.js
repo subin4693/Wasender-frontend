@@ -220,6 +220,7 @@ export default function LogPage() {
                     placeholder="From"
                     id="selectTag"
                     onChange={(e) => {
+                      console.log(e);
                       setFromSelect(e);
                     }}
                     options={fromOptions}

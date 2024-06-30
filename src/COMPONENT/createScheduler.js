@@ -123,7 +123,7 @@ export default function CreateScheduler() {
                     if (dataObj) {
                         setShow(dataObj.type);
 
-                        let fromCon = dataObj.from;
+                        let fromCon = dataObj.to;
                         let fromObj = [];
                         for (let i = 0; i < fromCon.length; i++) {
                             fromObj.push({
@@ -134,7 +134,7 @@ export default function CreateScheduler() {
                             });
                         }
                         setSelected(fromObj);
-                        setSelectedOption(dataObj.to);
+                        setSelectedOption(dataObj.from);
                         setBodyText(dataObj.body);
                         setDocTitle(dataObj.fileName);
                         setUrl(dataObj.file);
@@ -614,3 +614,4 @@ export default function CreateScheduler() {
         </div>
     );
 }
+

@@ -35,7 +35,6 @@ export default function ContactsPage() {
 
     useEffect(() => {
         try {
-            console.log(page);
             handleGetContacts(page);
         } catch (err) {
             console.log(err);

@@ -21,7 +21,7 @@ import Loading from "./loader";
 export default function CreateReplyPage() {
     const [show, setShow] = useState("chat");
     const [selected, setSelected] = useState([]);
-    const [selectedOption, setSelectedOption] = useState(null);
+    const [selectedOption, setSelectedOption] = useState([]);
     const [fromOptions, setFromOptions] = useState([]);
     const [toOptions, setToOptions] = useState([]);
 
@@ -112,8 +112,9 @@ export default function CreateReplyPage() {
                     let dataObj = res.data?.msg;
                     if (dataObj) {
                         setShow(dataObj.type);
+                        console.log(dataObj);
 
-                        let fromCon = dataObj.from;
+                        let fromCon = dataObj.to;
                         let fromObj = [];
                         for (let i = 0; i < fromCon.length; i++) {
                             fromObj.push({
@@ -123,8 +124,9 @@ export default function CreateReplyPage() {
                                 number: fromCon[i].value,
                             });
                         }
-                        setSelected(fromObj);
-                        setSelectedOption(dataObj.to);
+                        setSelectedOption(fromObj);
+                        setSelected(dataObj.from);
+                        // setSelectedOption(dataObj.from);
                         setBodyText(dataObj.body);
                         setDocTitle(dataObj.fileName);
                         setUrl(dataObj.file);
@@ -323,12 +325,14 @@ export default function CreateReplyPage() {
                                     <div className="toDiv">
                                         <div className="spanA">From:</div>
                                         <div className="spanB">
-                                            <MultiSelect
-                                                id="multiSelect"
+                                            <Select
+                                                placeholder="To"
+                                                id="selectTag"
+                                                // defaultValue={selectedOption}
+
                                                 options={fromOptions}
                                                 value={selected}
                                                 onChange={setSelected}
-                                                labelledBy="Select"
                                             />
                                         </div>
                                     </div>
@@ -336,13 +340,12 @@ export default function CreateReplyPage() {
                                     <div className="toDiv">
                                         <div className="spanA">To:</div>
                                         <div className="spanB">
-                                            <Select
-                                                placeholder="To"
-                                                id="selectTag"
+                                            <MultiSelect
+                                                id="multiSelect"
                                                 value={selectedOption}
-                                                // defaultValue={selectedOption}
                                                 onChange={setSelectedOption}
                                                 options={toOptions}
+                                                labelledBy="Select"
                                             />
                                         </div>
                                     </div>
@@ -590,3 +593,4 @@ export default function CreateReplyPage() {
         </div>
     );
 }
+
