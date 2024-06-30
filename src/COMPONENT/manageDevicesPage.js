@@ -34,6 +34,7 @@ export default function ManageDevicesPage() {
   // const insTok = "tz4c7nm9r4luh6i4";
   const dispatch = useDispatch();
   const [status, setStatus] = useState(false);
+  const navigate = useNavigate();
 
   const { id } = useParams();
 
@@ -176,7 +177,7 @@ export default function ManageDevicesPage() {
       },
       params: { token },
     };
-
+    console.log(config);
     const status = await axios(config)
       .then(function (res) {
         console.log(JSON.stringify(res.data));
@@ -233,6 +234,23 @@ export default function ManageDevicesPage() {
     }
   };
 
+  const handleDelete = async () => {
+    try {
+      console.log(device);
+      await axios
+        .delete(`${linkNode}/devices/delete/${device._id}`)
+        .then((res) => {
+          console.log(res);
+          navigate("/filearea/devices");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="manageDevicesPage">
       <div className="header">
@@ -263,7 +281,7 @@ export default function ManageDevicesPage() {
                   <div className="content">1qa2fg4y67uji89k</div>
                 </td>
                 <td className="tdD">
-                  <button className="rocketBtn delbtn">
+                  <button className="rocketBtn delbtn" onClick={handleDelete}>
                     <span className="rocketIcon">
                       <DeleteRounded id="rocketIcon" />
                     </span>
@@ -425,3 +443,4 @@ export default function ManageDevicesPage() {
     </div>
   );
 }
+
