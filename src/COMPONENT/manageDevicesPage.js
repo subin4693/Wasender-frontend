@@ -34,6 +34,7 @@ export default function ManageDevicesPage() {
   // const insTok = "tz4c7nm9r4luh6i4";
   const dispatch = useDispatch();
   const [status, setStatus] = useState(false);
+  const navigate = useNavigate();
 
   const { id } = useParams();
 
@@ -235,6 +236,16 @@ export default function ManageDevicesPage() {
 
   const handleDelete = async () => {
     try {
+      console.log(device);
+      await axios
+        .delete(`${linkNode}/devices/delete/${device._id}`)
+        .then((res) => {
+          console.log(res);
+          navigate("/filearea/devices");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     } catch (error) {
       console.log(error);
     }
