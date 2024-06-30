@@ -80,7 +80,7 @@ export default function ReplyPage() {
 
     const HandleFrom = (data) => {
         try {
-            let contacts = data?.from;
+            let contacts = data?.to;
             let fromNames = [];
 
             for (let i = 0; i < contacts.length; i++) {
@@ -162,10 +162,11 @@ export default function ReplyPage() {
                                         return (
                                             <tr>
                                                 <td>{data?.message}</td>
+                                                <td>{data.from.label}</td>
                                                 <td>{HandleFrom(data)}</td>
-                                                <td>{data.to.label}</td>
+
                                                 <td>{data.type}</td>
-                                                {/*<td>{data.body}</td>*/}
+                                                <td>{data.body}</td>
                                                 <td className="tdE">
                                                     <button
                                                         onClick={() => {
